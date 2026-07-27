@@ -102,18 +102,35 @@ Protocol selectors probed - dead / gated:
 
 ## Keeping this current
 
-The files under `files/` are re-fetched automatically by a GitHub Actions workflow
-([`.github/workflows/refetch.yml`](.github/workflows/refetch.yml)) on a weekly schedule (and on
-manual `workflow_dispatch`). The workflow builds the
-[d2-clientless](https://github.com/jaenster/d2-clientless) BNFTP client, runs
-[`scripts/refetch.sh`](scripts/refetch.sh) against the hosts listed in
-[`fetch-list`](fetch-list), and commits any files whose bytes changed. `SHA256SUMS` is the change
-record (a diff there is the diff of the archive), and `LAST-FETCHED.txt` records when the pipeline
-last ran and which hosts it pulled from. If nothing changed, the workflow commits nothing.
+The files under `files/` are re-fetched by a multi-source Kubernetes poller
+(`d2-bnftp-poller`) on a weekly schedule. It builds the
+[d2-clientless](https://github.com/jaenster/d2-clientless) BNFTP client and fetches every file in
+[`fetch-list`](fetch-list) from several live Battle.net sources, then compares and commits any
+changes. It runs as a 3-shard Indexed Job (one pod per node, so three distinct egress IPs) that
+fetches `(file, source)` pairs in parallel; a coordinator then compares the results and places
+them.
 
-This can also run as a Kubernetes CronJob instead of GitHub Actions: build the clientless BNFTP
-tool into a small image, run `scripts/refetch.sh` on a schedule, and push commits with a deploy
-key. That is preferred if you want the re-fetch on your own infra rather than GitHub runners.
+Each `fetch-list` line is `<class> <filename>`:
+
+- `d2` files are fetched from all five D2 sources - the named gateways
+  `useast` / `uswest` / `asia` / `europe` (product D2XP) plus `vegas`, the unnamed Las Vegas
+  gateway IP pool - and compared byte for byte.
+- `forever` files are fetched only from `connect-forever.classic.blizzard.com`, which serves the
+  Diablo-1 + PowerPC-Mac legacy set.
+
+Placement:
+
+- A `d2` file that is byte-identical across all sources is written to the canonical path
+  `files/<filename>`.
+- A `d2` file that differs between sources is written per source to `files/<source>/<filename>`
+  (for every source), and the canonical copy is removed.
+- `forever` files are always written to `files/forever/<filename>`.
+
+`SHA256SUMS` is regenerated recursively over `files/**` (a diff there is the diff of the archive).
+[`REALM-DIVERGENCE.md`](REALM-DIVERGENCE.md) lists every file that is not in the canonical
+`files/` - i.e. the per-source divergent files and the legacy set - with its per-source sha256.
+`LAST-FETCHED.txt` records when the pipeline last ran. If nothing changed, it commits nothing. The
+poller streams its progress and any divergences to a Discord webhook.
 
 
 ## Provenance & legal

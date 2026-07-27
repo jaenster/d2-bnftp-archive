@@ -1,100 +1,109 @@
-# fetch-list: one line per archived file -- host product filename
-# host = BNFTP server; product = 4CC scope (ignored on connect-forever's flat namespace)
-# useast.battle.net serves the Diablo II set (product-scoped D2XP)
-# connect-forever.classic.blizzard.com serves the Diablo I + PowerPC-Mac set (flat namespace)
-useast.battle.net D2XP CheckRevision.mpq
-connect-forever.classic.blizzard.com D2XP CheckRevisionD1.mpq
-useast.battle.net D2XP D2DV_IX86_1xx_114d.mpq
-useast.battle.net D2XP D2DV_XMAC_1xx_114d.mpq
-useast.battle.net D2XP D2XP_IX86_1xx_114d.mpq
-useast.battle.net D2XP D2XP_XMAC_1xx_114d.mpq
-connect-forever.classic.blizzard.com D2XP DRTL_IX86_108_109.mpq
-connect-forever.classic.blizzard.com D2XP DRTL_PMAC_108_109.mpq
-connect-forever.classic.blizzard.com D2XP DSHR_IX86_108_109.mpq
-connect-forever.classic.blizzard.com D2XP DSHR_PMAC_108_109.mpq
-useast.battle.net D2XP bnserver-D2DV.ini
-connect-forever.classic.blizzard.com D2XP bnserver-connect-forever.ini
-useast.battle.net D2XP bnserver.ini
-useast.battle.net D2XP icons.bni
-useast.battle.net D2XP icons_SEXP.bni
-useast.battle.net D2XP icons_STAR.bni
-useast.battle.net D2XP lockdown-IX86-00.mpq
-useast.battle.net D2XP lockdown-IX86-01.mpq
-useast.battle.net D2XP lockdown-IX86-02.mpq
-useast.battle.net D2XP lockdown-IX86-03.mpq
-useast.battle.net D2XP lockdown-IX86-04.mpq
-useast.battle.net D2XP lockdown-IX86-05.mpq
-useast.battle.net D2XP lockdown-IX86-06.mpq
-useast.battle.net D2XP lockdown-IX86-07.mpq
-useast.battle.net D2XP lockdown-IX86-08.mpq
-useast.battle.net D2XP lockdown-IX86-09.mpq
-useast.battle.net D2XP lockdown-IX86-10.mpq
-useast.battle.net D2XP lockdown-IX86-11.mpq
-useast.battle.net D2XP lockdown-IX86-12.mpq
-useast.battle.net D2XP lockdown-IX86-13.mpq
-useast.battle.net D2XP lockdown-IX86-14.mpq
-useast.battle.net D2XP lockdown-IX86-15.mpq
-useast.battle.net D2XP lockdown-IX86-16.mpq
-useast.battle.net D2XP lockdown-IX86-17.mpq
-useast.battle.net D2XP lockdown-IX86-18.mpq
-useast.battle.net D2XP lockdown-IX86-19.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-00.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-01.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-02.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-03.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-04.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-05.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-06.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-07.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-08.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-09.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-10.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-11.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-12.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-13.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-14.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-15.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-16.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-17.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-18.mpq
-connect-forever.classic.blizzard.com D2XP psistorm-PMAC-19.mpq
-useast.battle.net D2XP psistorm-XMAC-00.mpq
-useast.battle.net D2XP psistorm-XMAC-01.mpq
-useast.battle.net D2XP psistorm-XMAC-02.mpq
-useast.battle.net D2XP psistorm-XMAC-03.mpq
-useast.battle.net D2XP psistorm-XMAC-04.mpq
-useast.battle.net D2XP psistorm-XMAC-05.mpq
-useast.battle.net D2XP psistorm-XMAC-06.mpq
-useast.battle.net D2XP psistorm-XMAC-07.mpq
-useast.battle.net D2XP psistorm-XMAC-08.mpq
-useast.battle.net D2XP psistorm-XMAC-09.mpq
-useast.battle.net D2XP psistorm-XMAC-10.mpq
-useast.battle.net D2XP psistorm-XMAC-11.mpq
-useast.battle.net D2XP psistorm-XMAC-12.mpq
-useast.battle.net D2XP psistorm-XMAC-13.mpq
-useast.battle.net D2XP psistorm-XMAC-14.mpq
-useast.battle.net D2XP psistorm-XMAC-15.mpq
-useast.battle.net D2XP psistorm-XMAC-16.mpq
-useast.battle.net D2XP psistorm-XMAC-17.mpq
-useast.battle.net D2XP psistorm-XMAC-18.mpq
-useast.battle.net D2XP psistorm-XMAC-19.mpq
-useast.battle.net D2XP tos.txt
-useast.battle.net D2XP tos_BRA.txt
-useast.battle.net D2XP tos_DEU.txt
-useast.battle.net D2XP tos_ESP.txt
-useast.battle.net D2XP tos_FRA.txt
-useast.battle.net D2XP tos_ITA.txt
-useast.battle.net D2XP tos_JPN.txt
-useast.battle.net D2XP tos_POL.txt
-useast.battle.net D2XP tos_USA.txt
-useast.battle.net D2XP ver-IX86-0.mpq
-useast.battle.net D2XP ver-IX86-1.mpq
-useast.battle.net D2XP ver-IX86-2.mpq
-useast.battle.net D2XP ver-IX86-3.mpq
-useast.battle.net D2XP ver-IX86-4.mpq
-useast.battle.net D2XP ver-IX86-5.mpq
-useast.battle.net D2XP ver-IX86-6.mpq
-useast.battle.net D2XP ver-IX86-7.mpq
-useast.battle.net D2XP ver-OSXI-0.mpq
-useast.battle.net D2XP ver-PMAC-0.mpq
-useast.battle.net D2XP ver-XMAC-0.mpq
+# fetch-list: one line per archived file -- <class> <filename>
+#
+# class d2      = fetched from all 5 D2 sources and compared:
+#                 useast/uswest/asia/europe (named D2XP gateways) + vegas
+#                 (the unnamed Las Vegas IP pool). Byte-identical across all
+#                 sources -> canonical files/<filename>; any divergence ->
+#                 files/<source>/<filename> for every source.
+# class forever = fetched from connect-forever.classic.blizzard.com only
+#                 (the Diablo-1 + PowerPC-Mac legacy set). Always placed at
+#                 files/forever/<filename>.
+#
+# The Zig poller only fetches+stages; the pod-0 coordinator compares and
+# places. See the poller README for the full placement rule.
+d2 CheckRevision.mpq
+d2 D2DV_IX86_1xx_114d.mpq
+d2 D2DV_XMAC_1xx_114d.mpq
+d2 D2XP_IX86_1xx_114d.mpq
+d2 D2XP_XMAC_1xx_114d.mpq
+d2 bnserver-D2DV.ini
+d2 bnserver.ini
+d2 icons.bni
+d2 icons_SEXP.bni
+d2 icons_STAR.bni
+d2 lockdown-IX86-00.mpq
+d2 lockdown-IX86-01.mpq
+d2 lockdown-IX86-02.mpq
+d2 lockdown-IX86-03.mpq
+d2 lockdown-IX86-04.mpq
+d2 lockdown-IX86-05.mpq
+d2 lockdown-IX86-06.mpq
+d2 lockdown-IX86-07.mpq
+d2 lockdown-IX86-08.mpq
+d2 lockdown-IX86-09.mpq
+d2 lockdown-IX86-10.mpq
+d2 lockdown-IX86-11.mpq
+d2 lockdown-IX86-12.mpq
+d2 lockdown-IX86-13.mpq
+d2 lockdown-IX86-14.mpq
+d2 lockdown-IX86-15.mpq
+d2 lockdown-IX86-16.mpq
+d2 lockdown-IX86-17.mpq
+d2 lockdown-IX86-18.mpq
+d2 lockdown-IX86-19.mpq
+d2 psistorm-XMAC-00.mpq
+d2 psistorm-XMAC-01.mpq
+d2 psistorm-XMAC-02.mpq
+d2 psistorm-XMAC-03.mpq
+d2 psistorm-XMAC-04.mpq
+d2 psistorm-XMAC-05.mpq
+d2 psistorm-XMAC-06.mpq
+d2 psistorm-XMAC-07.mpq
+d2 psistorm-XMAC-08.mpq
+d2 psistorm-XMAC-09.mpq
+d2 psistorm-XMAC-10.mpq
+d2 psistorm-XMAC-11.mpq
+d2 psistorm-XMAC-12.mpq
+d2 psistorm-XMAC-13.mpq
+d2 psistorm-XMAC-14.mpq
+d2 psistorm-XMAC-15.mpq
+d2 psistorm-XMAC-16.mpq
+d2 psistorm-XMAC-17.mpq
+d2 psistorm-XMAC-18.mpq
+d2 psistorm-XMAC-19.mpq
+d2 tos.txt
+d2 tos_BRA.txt
+d2 tos_DEU.txt
+d2 tos_ESP.txt
+d2 tos_FRA.txt
+d2 tos_ITA.txt
+d2 tos_JPN.txt
+d2 tos_POL.txt
+d2 tos_USA.txt
+d2 ver-IX86-0.mpq
+d2 ver-IX86-1.mpq
+d2 ver-IX86-2.mpq
+d2 ver-IX86-3.mpq
+d2 ver-IX86-4.mpq
+d2 ver-IX86-5.mpq
+d2 ver-IX86-6.mpq
+d2 ver-IX86-7.mpq
+d2 ver-OSXI-0.mpq
+d2 ver-PMAC-0.mpq
+d2 ver-XMAC-0.mpq
+forever CheckRevisionD1.mpq
+forever DRTL_IX86_108_109.mpq
+forever DRTL_PMAC_108_109.mpq
+forever DSHR_IX86_108_109.mpq
+forever DSHR_PMAC_108_109.mpq
+forever bnserver-connect-forever.ini
+forever psistorm-PMAC-00.mpq
+forever psistorm-PMAC-01.mpq
+forever psistorm-PMAC-02.mpq
+forever psistorm-PMAC-03.mpq
+forever psistorm-PMAC-04.mpq
+forever psistorm-PMAC-05.mpq
+forever psistorm-PMAC-06.mpq
+forever psistorm-PMAC-07.mpq
+forever psistorm-PMAC-08.mpq
+forever psistorm-PMAC-09.mpq
+forever psistorm-PMAC-10.mpq
+forever psistorm-PMAC-11.mpq
+forever psistorm-PMAC-12.mpq
+forever psistorm-PMAC-13.mpq
+forever psistorm-PMAC-14.mpq
+forever psistorm-PMAC-15.mpq
+forever psistorm-PMAC-16.mpq
+forever psistorm-PMAC-17.mpq
+forever psistorm-PMAC-18.mpq
+forever psistorm-PMAC-19.mpq
