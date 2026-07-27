@@ -1,0 +1,87 @@
+# Battle.net classic BNFTP archive (Diablo / Diablo II)
+
+A snapshot of **every file Blizzard's classic-games login servers serve over BNFTP** - the
+unauthenticated Battle.net File Transfer protocol - captured by live-probing `*.battle.net:6112`
+in 2026.
+
+BNFTP is protocol selector `0x02`: you open a TCP connection to a Battle.net server, send `0x02`,
+then a file request, and the server streams the file back. **No account, no CD-key, no
+authentication.** It's how the classic client fetches its version-check module, anti-cheat
+modules, the gateway list, channel icons, and the ToS. Everything here is what came back.
+
+Captured with our clientless BNFTP client (`bnftp-probe`) while reverse-engineering the classic
+Battle.net protocol. The protocol details - selectors, request/reply framing, the file namespace,
+and what's still live vs. retired - are in [`BNETDOCS-REFERENCE.md`](BNETDOCS-REFERENCE.md).
+Integrity hashes for every file are in [`SHA256SUMS`](SHA256SUMS).
+
+
+## Why this exists
+
+These files are the ground truth for anyone implementing a classic-Battle.net-compatible server
+(PvPGN-style), studying the version-check / anti-cheat handshake, or preserving the classic
+Battle.net platform. They're served publicly and unauthenticated by Blizzard's own servers; this
+is a stable, hash-verified copy so you don't have to re-probe live infrastructure to get them.
+
+
+## What's here
+
+All files are under [`files/`](files/).
+
+### Version-check modules
+
+The MPQs Blizzard sends to run `CheckRevision` - the client hashes game files against a formula
+and returns a checksum + version. The server names one of the `ver-*` stubs in its challenge.
+
+| file | game |
+|-|-|
+| `CheckRevision.mpq` | Diablo II |
+| `CheckRevisionD1.mpq` | Diablo I |
+| `ver-IX86-0`...`ver-IX86-7.mpq` | version stubs, Windows (x86), indices 0-7 |
+| `ver-PMAC-0.mpq` / `ver-XMAC-0.mpq` / `ver-OSXI-0.mpq` | version stubs, PowerPC / Intel Mac / OSX-Intel |
+
+### Anti-cheat modules
+
+Blizzard's per-session anti-cheat ("Warden"-lineage) modules - the server picks one of ~20 by
+index each login. `lockdown` is the Windows family; `psistorm` is the Mac family.
+
+| family | platform | files |
+|-|-|-|
+| `lockdown-IX86-00`...`19.mpq` | Windows (x86) | 20 |
+| `psistorm-PMAC-00`...`19.mpq` | PowerPC Mac | 20 |
+| `psistorm-XMAC-00`...`19.mpq` | Intel Mac | 20 |
+
+### Game auto-update MPQs
+
+The patch/update MPQs the server offers per product x platform (the `_1xx_114d` / `_108_109`
+suffix is the version range they bridge).
+
+| product | meaning | platforms present |
+|-|-|-|
+| `D2DV_*_1xx_114d.mpq` | Diablo II | IX86, XMAC |
+| `D2XP_*_1xx_114d.mpq` | Diablo II: Lord of Destruction | IX86, XMAC |
+| `DRTL_*_108_109.mpq` | Diablo I (retail) | IX86, PMAC |
+| `DSHR_*_108_109.mpq` | Diablo I (shareware) | IX86, PMAC |
+
+### Server config, icons, ToS
+
+| file | what |
+|-|-|
+| `bnserver.ini`, `bnserver-D2DV.ini`, `bnserver-connect-forever.ini` | gateway/server lists (region -> hostname/zone) |
+| `icons.bni`, `icons_STAR.bni`, `icons_SEXP.bni` | channel/user icon packs |
+| `tos*.txt` | Terms of Service, 9 languages (USA, BRA, DEU, ESP, FRA, ITA, JPN, POL, default) |
+
+
+## Verifying
+
+```sh
+cd files && shasum -a 256 -c ../SHA256SUMS
+```
+
+
+## Provenance & legal
+
+These files are **Blizzard Entertainment's**, retrieved verbatim from Blizzard's own public,
+unauthenticated BNFTP servers (`*.battle.net:6112`, protocol `0x02`). They are mirrored here for
+preservation, research, and classic-Battle.net-server interoperability. No files were modified. All
+trademarks and copyrights belong to Blizzard Entertainment; this archive is not affiliated with or
+endorsed by Blizzard. If you are a rights holder and want something removed, open an issue.
