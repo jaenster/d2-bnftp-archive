@@ -1,0 +1,48 @@
+name: refetch
+
+on:
+  schedule:
+    # Weekly, Mondays 06:00 UTC.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout archive
+        uses: actions/checkout@v4
+
+      - name: Checkout d2-clientless
+        uses: actions/checkout@v4
+        with:
+          repository: jaenster/d2-clientless
+          path: d2-clientless
+
+      - name: Setup Zig 0.16.0
+        uses: mlugg/setup-zig@v2
+        with:
+          version: 0.16.0
+
+      - name: Re-fetch BNFTP files
+        run: scripts/refetch.sh "$GITHUB_WORKSPACE/d2-clientless"
+
+      - name: Commit changed files
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- files SHA256SUMS)" ]; then
+            echo "no changes under files/ or SHA256SUMS; nothing to commit"
+            exit 0
+          fi
+          # Refresh the timestamp record too, but the change trigger is data.
+          git add files SHA256SUMS LAST-FETCHED.txt
+          CHANGED="$(git diff --cached --name-only -- files SHA256SUMS | sed 's#^files/##' | sort | tr '\n' ' ')"
+          N="$(git diff --cached --name-only -- files SHA256SUMS | grep -c '^files/' || true)"
+          DATE="$(date -u +%Y-%m-%d)"
+          git config user.name "bnftp-archive-bot"
+          git config user.email "bnftp-archive-bot@users.noreply.github.com"
+          git commit -m "refetch: update ${N} changed files (${DATE})" -m "changed: ${CHANGED}"
+          git push

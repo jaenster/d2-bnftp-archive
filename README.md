@@ -78,6 +78,44 @@ cd files && shasum -a 256 -c ../SHA256SUMS
 ```
 
 
+## What is NOT served
+
+Product 4CCs probed - dead / no BNFTP patch:
+- DIAB (Diablo 1 beta), DTST (Diablo 1 stress), D2ST (Diablo 2 stress), W3DM (WC3 demo): server holds silent / retired
+- StarCraft / Brood War / WarCraft II (STAR/SEXP/W2BN): connect + auth work, but their version-check returns 0x102 = no BNFTP game patch served
+- WAR3 / W3XP: NLS-auth only, so the MPQ-name oracle cannot enumerate them (not old-SID)
+- No undocumented legacy 4CCs (BNET/TEST/BETA/BLIZ/ADMN/RATS/...): all dead
+
+Filenames probed - confirmed absent (0-byte / not hosted):
+- IX86ExtraWork.mpq, any Warden / scan.dll module (the 1.14 anti-cheat file the client references is not on BNFTP)
+- news / ad / version text
+- any .pdb or debug symbol
+- path traversal (../, absolute paths): all return 0 bytes
+- ToS beyond the 9 present: no KOR/CHN/TWN/GBR/RUS (exactly the official D2 localizations)
+
+Host-specific gaps - connect-forever.classic.blizzard.com (the parked global gateway) omits: CheckRevision.mpq (D2), D2 _1xx_114d patches, psistorm-XMAC / psistorm-IX86, lockdown-XMAC/PMAC, ver-*-1..7, icons_STAR/SEXP. It serves the Diablo-1 + PowerPC-Mac set instead.
+
+Protocol selectors probed - dead / gated:
+- 0x03 Telnet chat: retired, silent
+- 0x04 MCP, 0x06 interserver, 0x81: silent hold, IP-gated
+
+
+## Keeping this current
+
+The files under `files/` are re-fetched automatically by a GitHub Actions workflow
+([`.github/workflows/refetch.yml`](.github/workflows/refetch.yml)) on a weekly schedule (and on
+manual `workflow_dispatch`). The workflow builds the
+[d2-clientless](https://github.com/jaenster/d2-clientless) BNFTP client, runs
+[`scripts/refetch.sh`](scripts/refetch.sh) against the hosts listed in
+[`fetch-list`](fetch-list), and commits any files whose bytes changed. `SHA256SUMS` is the change
+record (a diff there is the diff of the archive), and `LAST-FETCHED.txt` records when the pipeline
+last ran and which hosts it pulled from. If nothing changed, the workflow commits nothing.
+
+This can also run as a Kubernetes CronJob instead of GitHub Actions: build the clientless BNFTP
+tool into a small image, run `scripts/refetch.sh` on a schedule, and push commits with a deploy
+key. That is preferred if you want the re-fetch on your own infra rather than GitHub runners.
+
+
 ## Provenance & legal
 
 These files are **Blizzard Entertainment's**, retrieved verbatim from Blizzard's own public,
