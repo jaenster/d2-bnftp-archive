@@ -1,10 +1,20 @@
 # Realm divergence report
 
-Generated 2026-07-28T10:57:39Z by the 3-shard Argo Workflows multi-source poller.
+Generated 2026-07-28T12:22:22Z by the 3-shard Argo Workflows multi-source poller.
 
 Files here were NOT byte-identical across all D2 sources, plus the
 forever-only legacy set. Byte-identical D2 files live at the canonical
 path files/<filename> and are omitted below.
+
+## CheckRevision.mpq
+
+| source | sha256 |
+|-|-|
+| useast | 70ce218463f1eda77e1c0a25985395159cc958072a8e989209d05307e4f97528 |
+| uswest | 70ce218463f1eda77e1c0a25985395159cc958072a8e989209d05307e4f97528 |
+| asia | 01124410b2ac5ef0f1bbc1df32f529a02353f7384ea23767bc51eb826655ae68 |
+| europe | 70ce218463f1eda77e1c0a25985395159cc958072a8e989209d05307e4f97528 |
+| vegas | 70ce218463f1eda77e1c0a25985395159cc958072a8e989209d05307e4f97528 |
 
 ## DRTL_IX86_108_109.mpq
 
@@ -166,7 +176,7 @@ path files/<filename> and are omitted below.
 |-|-|
 | useast | a7cd8e5f74df2e920531eb0e934cb7e29d5156df763747206b2aedcda8dbedf0 |
 | uswest | a7cd8e5f74df2e920531eb0e934cb7e29d5156df763747206b2aedcda8dbedf0 |
-| asia | a7cd8e5f74df2e920531eb0e934cb7e29d5156df763747206b2aedcda8dbedf0 |
+| asia | 7b8c15a2dc59ad8e70097038204556e2bbe0177ac6b8faaffcce527767c0fdff |
 | europe | a7cd8e5f74df2e920531eb0e934cb7e29d5156df763747206b2aedcda8dbedf0 |
 | vegas | 50c67c8f7c85bad31430cc61ae26f5156b7a8b1013eeced8e131189cd0049835 |
 
