@@ -5,8 +5,8 @@
     .fingerprint = 0x339ff8e3b0cb2af2,
     .dependencies = .{
         .clientless = .{
-            .url = "git+https://github.com/jaenster/d2-clientless.git#d915bbecb5e1318b2283788cd1a2c8c85ff1bd92",
-            .hash = "clientless-0.1.0-lyHu8o49AwCfL7caC7Xyb0P2TvmkIr7v3TeEyxcgakIa",
+            .url = "git+https://github.com/jaenster/d2-clientless.git#2b3967216c34980f8234e8c998400aaa81567cf1",
+            .hash = "clientless-0.1.0-lyHu8nw_AwBHSqf_gQDTak9sxxSjRcVnpW5m78X8pfut",
         },
     },
     .paths = .{

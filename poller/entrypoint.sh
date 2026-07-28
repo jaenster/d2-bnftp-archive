@@ -26,6 +26,7 @@ REPO_URL="github.com/jaenster/d2-bnftp-archive.git"
 GH_REPO="jaenster/d2-bnftp-archive"
 FETCH_LIST_PATH="$REPO/fetch-list"
 D2_SOURCES="useast uswest asia europe vegas"
+FT_TMP="$WORK/.filetimes"
 
 ROLE="${1:-}"
 
@@ -76,6 +77,19 @@ discord() {
   [ -n "$chunk" ] && discord_post "$chunk"
 }
 
+record_ft() {
+  # Append "archive-path <TAB> ISO-date" for a placed file, reading Blizzard's
+  # last-write time from the staged <path>.ft sidecar. $1 = staged file path,
+  # $2 = archive path. Windows FILETIME is 100ns ticks since 1601-01-01.
+  local ftfile="$1.ft" ft unix iso
+  [ -s "$ftfile" ] || return 0
+  ft="$(cat "$ftfile" 2>/dev/null)"
+  case "$ft" in ''|0|*[!0-9]*) return 0 ;; esac
+  unix=$(( ft / 10000000 - 11644473600 ))
+  iso="$(date -u -d "@$unix" +%FT%TZ 2>/dev/null)" || iso="ft:$ft"
+  printf '%s\t%s\n' "$2" "$iso" >> "$FT_TMP"
+}
+
 role_clone() {
   log "clone: fresh clone of the archive repo"
   if [ -z "${GIT_TOKEN:-}" ]; then
@@ -116,6 +130,7 @@ role_collect() {
   fi
   cd "$REPO"
   mkdir -p files
+  : > "$FT_TMP"
 
   # Pre-run divergence set: basenames currently under the 5 d2 per-source dirs.
   ( cd files && find $D2_SOURCES -type f 2>/dev/null | sed 's|.*/||' | LC_ALL=C sort -u ) > "$WORK/.old_div" 2>/dev/null || : > "$WORK/.old_div"
@@ -130,35 +145,26 @@ role_collect() {
     esac
     [ -z "${filename:-}" ] && continue
 
-    if [ "$class" = "probe" ]; then
-      # Speculative name. If useast actually served it, it is a real find - keep it
-      # at the canonical path and remember it for the Discord alert.
-      local ph="$STAGE/useast/$filename"
-      if [ -s "$ph" ]; then
-        cp "$ph" "files/$filename"
-        probe_hits="$probe_hits $filename"
-        log "PROBE HIT $filename (served by useast)"
-      fi
-      continue
-    fi
-
     if [ "$class" = "forever" ]; then
       local src="$STAGE/forever/$filename"
       if [ -s "$src" ]; then
         mkdir -p "files/forever"
         cp "$src" "files/forever/$filename"
+        record_ft "$src" "files/forever/$filename"
       else
         log "WARN forever/$filename missing from stage"
       fi
       continue
     fi
 
-    if [ "$class" != "d2" ]; then
+    if [ "$class" != "d2" ] && [ "$class" != "probe" ]; then
       log "WARN unknown class $class for $filename"
       continue
     fi
 
-    # Gather the d2 sources that produced bytes; decide identical vs divergent.
+    # d2 and probe share this path: gather the gateways that produced bytes and
+    # decide identical vs divergent. (A probe hit on even one gateway is a find;
+    # they only need to leak a file on a single realm.)
     local present="" first_sum="" identical=1 have=0
     for s in $D2_SOURCES; do
       local sp="$STAGE/$s/$filename"
@@ -176,7 +182,9 @@ role_collect() {
     done
 
     if [ "$have" -eq 0 ]; then
-      log "WARN d2/$filename: no source produced bytes"
+      # A probe miss is the expected case - stay silent; a d2 file served by nobody
+      # is worth a warning.
+      [ "$class" = "d2" ] && log "WARN d2/$filename: no source produced bytes"
       continue
     fi
 
@@ -184,21 +192,28 @@ role_collect() {
       # All five sources agree -> canonical. Drop any stale per-source copies.
       set -- $present
       cp "$STAGE/$1/$filename" "files/$filename"
+      record_ft "$STAGE/$1/$filename" "files/$filename"
       for s in $D2_SOURCES; do
         rm -f "files/$s/$filename"
       done
     else
       # Divergence (or a source missing bytes) -> per-source copies for every
       # source that produced bytes; drop the canonical copy.
-      log "DIVERGENCE d2/$filename (present:$present identical=$identical have=$have)"
+      log "DIVERGENCE $class/$filename (present:$present identical=$identical have=$have)"
       rm -f "files/$filename"
       for s in $D2_SOURCES; do
         local sp="$STAGE/$s/$filename"
         if [ -s "$sp" ]; then
           mkdir -p "files/$s"
           cp "$sp" "files/$s/$filename"
+          record_ft "$sp" "files/$s/$filename"
         fi
       done
+    fi
+
+    if [ "$class" = "probe" ]; then
+      probe_hits="$probe_hits $filename"
+      log "PROBE HIT $filename (present:$present)"
     fi
   done < "$FETCH_LIST_PATH"
 
@@ -214,6 +229,10 @@ role_collect() {
   else
     : > SHA256SUMS
   fi
+
+  # Blizzard's reported last-write time per archived file (git drops on-disk
+  # mtimes, so it lives in a committed manifest). Changes only when a file does.
+  if [ -s "$FT_TMP" ]; then LC_ALL=C sort "$FT_TMP" > FILETIMES.txt; else : > FILETIMES.txt; fi
 
   # Post-run divergence set + per-gateway liveness.
   ( cd files && find $D2_SOURCES -type f 2>/dev/null | sed 's|.*/||' | LC_ALL=C sort -u ) > "$WORK/.new_div" 2>/dev/null || : > "$WORK/.new_div"

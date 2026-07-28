@@ -142,15 +142,18 @@ starting with `#` are ignored. The class picks how it is fetched:
   you expect Blizzard to serve.
 - `forever` - fetch only from `connect-forever...`; always written to `files/forever/<filename>`.
   For the Diablo-1 / PowerPC-Mac legacy set.
-- `probe` - a speculative existence check: fetched once from `useast` only, no retry. Most probes
-  miss and cost almost nothing; if the gateway actually serves it, the file is committed and the
-  hit is flagged. The list already carries a large batch of candidate debug-symbol names
+- `probe` - a speculative existence check: fetched from all five gateways, single attempt each, no
+  retry. Most probes miss and cost almost nothing (fetches are paced to stay gentle). A hit on even
+  one gateway is committed and flagged - they only need to leak a file on a single realm for us to
+  catch it. The list already carries a large batch of candidate debug-symbol names
   (`*.pdb` / `*.map` / `*.sym` for every D2 module) on the off chance Blizzard ever exposes them.
 
 The next scheduled run (every 6 hours) - or a manual trigger - picks up the new line. `SHA256SUMS`
-is regenerated recursively over `files/**`, so a diff there is the diff of the archive. A run with
-no changes commits nothing; either way it streams a summary - committed changes, new/resolved
-cross-realm divergences, probe hits, and any errors - to a Discord webhook.
+is regenerated recursively over `files/**`, so a diff there is the diff of the archive.
+`FILETIMES.txt` records Blizzard's own reported last-write time (the FILETIME in the BNFTP reply
+header) for every archived file. A run with no changes commits nothing; either way it streams a
+summary - committed changes, new/resolved cross-realm divergences, probe hits, and any errors - to
+a Discord webhook.
 
 
 ## Provenance & legal

@@ -30,6 +30,7 @@ extern "c" fn write(fd: c_int, buf: [*]const u8, n: usize) isize;
 extern "c" fn read(fd: c_int, buf: [*]u8, n: usize) isize;
 extern "c" fn close(fd: c_int) c_int;
 extern "c" fn mkdir(path: [*:0]const u8, mode: c_uint) c_int;
+extern "c" fn usleep(usec: c_uint) c_int;
 
 // A source is a logical origin. A named gateway resolves to a single host; the
 // "vegas" pool has several raw IPs tried in order (first non-empty wins).
@@ -106,11 +107,11 @@ fn readWholeFile(gpa: std.mem.Allocator, path: []const u8) ![]u8 {
 // Fetch one (source, filename) with retry-on-empty. For a multi-host source the
 // hosts are tried in order; the first that returns non-empty wins. Returns an
 // empty slice if every host/attempt failed.
-fn fetchPair(gpa: std.mem.Allocator, src: *const Source, filename: []const u8, attempts: usize) []u8 {
+fn fetchPair(gpa: std.mem.Allocator, src: *const Source, filename: []const u8, attempts: usize, filetime_out: *u64) []u8 {
     var attempt: usize = 0;
     while (attempt < attempts) : (attempt += 1) {
         for (src.hosts) |host| {
-            const bytes = bnftp.fetch(gpa, host, bnftp_port, src.product, filename, .{}) catch |err| {
+            const bytes = bnftp.fetch(gpa, host, bnftp_port, src.product, filename, .{}, filetime_out) catch |err| {
                 if (attempts > 1)
                     out("  {s}/{s} try {d}/{d} via {s}: error {s}\n", .{ src.name, filename, attempt + 1, attempts, host, @errorName(err) });
                 continue;
@@ -133,6 +134,10 @@ pub fn main(init: std.process.Init.Minimal) !void {
     const stage_dir = envOr(env, "STAGE_DIR", "stage");
     const shard_index = envUsize(env, "SHARD_INDEX", 0);
     const shard_total = envUsize(env, "SHARD_TOTAL", 1);
+    // Gentle pacing between fetches so a shard (especially the ~4k probe checks,
+    // all against useast) never hammers a gateway into rate-limiting us. Slower is
+    // fine. Tunable via FETCH_DELAY_MS; 0 disables.
+    const delay_ms = envUsize(env, "FETCH_DELAY_MS", 200);
 
     if (shard_total == 0 or shard_index >= shard_total) {
         out("bad shard config: SHARD_INDEX={d} SHARD_TOTAL={d}\n", .{ shard_index, shard_total });
@@ -166,10 +171,10 @@ pub fn main(init: std.process.Init.Minimal) !void {
         } else if (std.mem.eql(u8, class, "forever")) {
             try pairs.append(gpa, .{ .source = &forever_source, .filename = fname, .attempts = max_retries, .is_probe = false });
         } else if (std.mem.eql(u8, class, "probe")) {
-            // Speculative existence check against one gateway (useast), single try:
-            // most probes miss (0 bytes) so no retry and no 5x fan-out. A hit is
-            // staged like any useast file and surfaced by collect as a new find.
-            try pairs.append(gpa, .{ .source = &d2_sources[0], .filename = fname, .attempts = 1, .is_probe = true });
+            // Speculative existence check across all five gateways, single try each:
+            // most probes miss (0 bytes) so no retry. A hit flows through the same
+            // compare/placement as a d2 file and is surfaced by collect as a find.
+            for (&d2_sources) |*s| try pairs.append(gpa, .{ .source = s, .filename = fname, .attempts = 1, .is_probe = true });
         } else {
             out("skipping unknown class \"{s}\" for {s}\n", .{ class, fname });
         }
@@ -194,10 +199,12 @@ pub fn main(init: std.process.Init.Minimal) !void {
     for (pairs.items, 0..) |p, idx| {
         if (idx % shard_total != shard_index) continue;
         if (p.is_probe) probe_checked += 1 else processed += 1;
+        if (delay_ms > 0) _ = usleep(@intCast(delay_ms * 1000)); // pace every fetch, hit or miss
         defer _ = scratch.reset(.retain_capacity);
         const sa = scratch.allocator();
 
-        const bytes = fetchPair(sa, p.source, p.filename, p.attempts);
+        var filetime: u64 = 0;
+        const bytes = fetchPair(sa, p.source, p.filename, p.attempts, &filetime);
         if (bytes.len == 0) {
             // A probe miss is the expected case - stay quiet. A real 0-byte means the
             // source does not serve that file.
@@ -216,6 +223,12 @@ pub fn main(init: std.process.Init.Minimal) !void {
             out("FAILED {s}/{s}: write error {s}\n", .{ p.source.name, p.filename, @errorName(werr) });
             continue;
         };
+        // Record Blizzard's last-write time in a sidecar so collect can build the
+        // committed FILETIMES manifest (git does not preserve on-disk mtimes).
+        const ftp = try std.fmt.allocPrintSentinel(sa, "{s}/{s}/{s}.ft", .{ stage_dir, p.source.name, p.filename }, 0);
+        var ftbuf: [24]u8 = undefined;
+        const fts = std.fmt.bufPrint(&ftbuf, "{d}", .{filetime}) catch "0";
+        writeFileZ(ftp.ptr, fts) catch {};
         if (p.is_probe) {
             probe_hit += 1;
             out("PROBE HIT {s}/{s} {d} bytes\n", .{ p.source.name, p.filename, bytes.len });
