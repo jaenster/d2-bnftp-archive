@@ -129,6 +129,11 @@ role_collect() {
     discord "ERROR: collect role has no GIT_TOKEN"; return 2
   fi
   cd "$REPO"
+  # Refresh to the freshest origin/main before doing anything, so the resulting
+  # commit is always a plain fast-forward (the push can't race a mid-run edit).
+  # Safe: the clone has no local commits, and the fetched bytes live in stage/,
+  # outside the repo, so this only advances the working tree to the latest remote.
+  git fetch -q origin main && git reset -q --hard origin/main
   mkdir -p files
   : > "$FT_TMP"
 
