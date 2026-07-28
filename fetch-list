@@ -1456,3 +1456,32 @@ probe artifacts.zip
 probe build.tar.gz
 probe MANIFEST.MF
 probe buildinfo.json
+
+# --- dev username + codenames from the Mac 1.14d build ---
+# The Mac build was compiled entirely under /Users/bclemetson/dev/diablo2/
+# (bclemetson is the only dev name present). Try the name as a filename,
+# plus umbrella/subproject codenames: DiabloAll, StormMac, crashy.
+probe bclemetson.zip
+probe bclemetson.mpq
+probe bclemetson.pdb
+probe bclemetson.tar.gz
+probe bclemetson.7z
+probe bclemetson.rar
+probe DiabloAll.zip
+probe DiabloAll.mpq
+probe DiabloAll.pdb
+probe DiabloAll.tar.gz
+probe DiabloAll.7z
+probe DiabloAll.rar
+probe StormMac.zip
+probe StormMac.mpq
+probe StormMac.pdb
+probe StormMac.tar.gz
+probe StormMac.7z
+probe StormMac.rar
+probe crashy.zip
+probe crashy.mpq
+probe crashy.pdb
+probe crashy.tar.gz
+probe crashy.7z
+probe crashy.rar
