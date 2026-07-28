@@ -1676,3 +1676,42 @@ probe DCC257CBDDFD421189ACF3D49F2A9818
 probe DCC257CBDDFD421189ACF3D49F2A9818.pdb
 probe {DCC257CB-DDFD-4211-89AC-F3D49F2A9818}
 probe {DCC257CB-DDFD-4211-89AC-F3D49F2A9818}.pdb
+# CheckRevision.dll (D:\git\service-cpp-bnet-legacy): {C52227F8-D058-4D0B-A817-FA7DC8105AE6} age 2
+# d2staged.exe    (D:\git\service-cpp-classic2):    {714EA741-F12A-4E1E-9364-DCB7F6CA750E} age 2
+probe C52227F8D0584D0BA817FA7DC8105AE62
+probe C52227F8D0584D0BA817FA7DC8105AE62.pdb
+probe C52227F8D0584D0BA817FA7DC8105AE6
+probe C52227F8D0584D0BA817FA7DC8105AE6.pdb
+probe {C52227F8-D058-4D0B-A817-FA7DC8105AE6}
+probe {C52227F8-D058-4D0B-A817-FA7DC8105AE6}.pdb
+probe 714EA741F12A4E1E9364DCB7F6CA750E2
+probe 714EA741F12A4E1E9364DCB7F6CA750E2.pdb
+probe 714EA741F12A4E1E9364DCB7F6CA750E
+probe 714EA741F12A4E1E9364DCB7F6CA750E.pdb
+probe {714EA741-F12A-4E1E-9364-DCB7F6CA750E}
+probe {714EA741-F12A-4E1E-9364-DCB7F6CA750E}.pdb
+# internal service repo codenames from those build paths:
+probe service-cpp-classic2.zip
+probe service-cpp-classic2.mpq
+probe service-cpp-classic2.tar.gz
+probe service-cpp-classic2.tgz
+probe service-cpp-classic2.7z
+probe service-cpp-classic2.pdb
+probe service-cpp-bnet-legacy.zip
+probe service-cpp-bnet-legacy.mpq
+probe service-cpp-bnet-legacy.tar.gz
+probe service-cpp-bnet-legacy.tgz
+probe service-cpp-bnet-legacy.7z
+probe service-cpp-bnet-legacy.pdb
+probe classic2.zip
+probe classic2.mpq
+probe classic2.tar.gz
+probe classic2.tgz
+probe classic2.7z
+probe classic2.pdb
+probe bnet-legacy.zip
+probe bnet-legacy.mpq
+probe bnet-legacy.tar.gz
+probe bnet-legacy.tgz
+probe bnet-legacy.7z
+probe bnet-legacy.pdb
