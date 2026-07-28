@@ -867,51 +867,8 @@ w3xp Mto.pdb
 w3xp Blizzard.pdb
 
 
-# --- architecture variants of the update MPQs (speculative: ARM / Apple-silicon
-#     and OSX-Intel platform codes alongside the known IX86/XMAC/PMAC)
-probe D2DV_XARM_1xx_114d.mpq
-probe D2DV_ARM_1xx_114d.mpq
-probe D2DV_A64_1xx_114d.mpq
-probe D2DV_ARM64_1xx_114d.mpq
-probe D2DV_AARCH64_1xx_114d.mpq
-probe D2DV_IARM_1xx_114d.mpq
-probe D2DV_XA64_1xx_114d.mpq
-probe D2DV_OSXI_1xx_114d.mpq
-probe D2XP_XARM_1xx_114d.mpq
-probe D2XP_ARM_1xx_114d.mpq
-probe D2XP_A64_1xx_114d.mpq
-probe D2XP_ARM64_1xx_114d.mpq
-probe D2XP_AARCH64_1xx_114d.mpq
-probe D2XP_IARM_1xx_114d.mpq
-probe D2XP_XA64_1xx_114d.mpq
-probe D2XP_OSXI_1xx_114d.mpq
-probe STAR_XARM_1xx_1161.mpq
-probe STAR_ARM_1xx_1161.mpq
-probe STAR_A64_1xx_1161.mpq
-probe STAR_ARM64_1xx_1161.mpq
-probe STAR_AARCH64_1xx_1161.mpq
-probe STAR_IARM_1xx_1161.mpq
-probe STAR_XA64_1xx_1161.mpq
-probe STAR_OSXI_1xx_1161.mpq
-probe SEXP_XARM_1xx_1161.mpq
-probe SEXP_ARM_1xx_1161.mpq
-probe SEXP_A64_1xx_1161.mpq
-probe SEXP_ARM64_1xx_1161.mpq
-probe SEXP_AARCH64_1xx_1161.mpq
-probe SEXP_IARM_1xx_1161.mpq
-probe SEXP_XA64_1xx_1161.mpq
-probe SEXP_OSXI_1xx_1161.mpq
-probe W2BN_XARM_1xx_2021.mpq
-probe W2BN_ARM_1xx_2021.mpq
-probe W2BN_A64_1xx_2021.mpq
-probe W2BN_ARM64_1xx_2021.mpq
-probe W2BN_AARCH64_1xx_2021.mpq
-probe W2BN_IARM_1xx_2021.mpq
-probe W2BN_XA64_1xx_2021.mpq
-probe W2BN_OSXI_1xx_2021.mpq
 
 # --- extra version-range variants (letter-suffixed classic versions; a few
-#     speculative D2R-style names too, though D2R is not served over classic BNFTP)
 probe D2DV_IX86_1xx_114a.mpq
 probe D2DV_IX86_1xx_114b.mpq
 probe D2DV_IX86_1xx_114c.mpq
@@ -956,11 +913,6 @@ probe SEXP_XMAC_1xx_116a.mpq
 probe SEXP_XMAC_1xx_116b.mpq
 probe SEXP_XMAC_1xx_116c.mpq
 probe SEXP_XMAC_1xx_116d.mpq
-probe D2R_IX86_1xx_20.mpq
-probe D2R_IX86_1xx_240.mpq
-probe D2R_IX86_1xx_250.mpq
-probe D2R_IX86_1xx_260.mpq
-probe D2R_IX86_1xx_270.mpq
 
 # --- D2 post-114d version guesses (115/116/2.0.0 - D2R was originally a D2 patch,
 #     so a D2DV/D2XP update MPQ past 114d may exist)
@@ -1375,3 +1327,51 @@ probe WIND2.mpq
 probe WIND2.zip
 probe WIN_D2.mpq
 probe WIN_D2.zip
+
+# --- architecture variants of the update MPQs (valid 4-char platform codes only,
+#     alongside known IX86/XMAC/PMAC; server serves by filename cross-platform)
+probe D2DV_XARM_1xx_114d.mpq
+probe D2DV_PARM_1xx_114d.mpq
+probe D2DV_IARM_1xx_114d.mpq
+probe D2DV_SARM_1xx_114d.mpq
+probe D2DV_ARM6_1xx_114d.mpq
+probe D2DV_AAR6_1xx_114d.mpq
+probe D2DV_XA64_1xx_114d.mpq
+probe D2DV_X64M_1xx_114d.mpq
+probe D2DV_OSXI_1xx_114d.mpq
+probe D2XP_XARM_1xx_114d.mpq
+probe D2XP_PARM_1xx_114d.mpq
+probe D2XP_IARM_1xx_114d.mpq
+probe D2XP_SARM_1xx_114d.mpq
+probe D2XP_ARM6_1xx_114d.mpq
+probe D2XP_AAR6_1xx_114d.mpq
+probe D2XP_XA64_1xx_114d.mpq
+probe D2XP_X64M_1xx_114d.mpq
+probe D2XP_OSXI_1xx_114d.mpq
+probe STAR_XARM_1xx_1161.mpq
+probe STAR_PARM_1xx_1161.mpq
+probe STAR_IARM_1xx_1161.mpq
+probe STAR_SARM_1xx_1161.mpq
+probe STAR_ARM6_1xx_1161.mpq
+probe STAR_AAR6_1xx_1161.mpq
+probe STAR_XA64_1xx_1161.mpq
+probe STAR_X64M_1xx_1161.mpq
+probe STAR_OSXI_1xx_1161.mpq
+probe SEXP_XARM_1xx_1161.mpq
+probe SEXP_PARM_1xx_1161.mpq
+probe SEXP_IARM_1xx_1161.mpq
+probe SEXP_SARM_1xx_1161.mpq
+probe SEXP_ARM6_1xx_1161.mpq
+probe SEXP_AAR6_1xx_1161.mpq
+probe SEXP_XA64_1xx_1161.mpq
+probe SEXP_X64M_1xx_1161.mpq
+probe SEXP_OSXI_1xx_1161.mpq
+probe W2BN_XARM_1xx_2021.mpq
+probe W2BN_PARM_1xx_2021.mpq
+probe W2BN_IARM_1xx_2021.mpq
+probe W2BN_SARM_1xx_2021.mpq
+probe W2BN_ARM6_1xx_2021.mpq
+probe W2BN_AAR6_1xx_2021.mpq
+probe W2BN_XA64_1xx_2021.mpq
+probe W2BN_X64M_1xx_2021.mpq
+probe W2BN_OSXI_1xx_2021.mpq
