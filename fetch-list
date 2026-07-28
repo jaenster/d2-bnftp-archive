@@ -112,7 +112,6 @@ forever psistorm-PMAC-19.mpq
 #     for existence against one gateway (useast), single attempt. A hit is a find.
 probe BATTLE.dbg
 probe BATTLE.map
-probe BATTLE.pdb
 probe BATTLE.sym
 probe BATTLED2.dbg
 probe BATTLED2.map
@@ -162,7 +161,6 @@ probe BNUPDATE_D2.dbg
 probe BNUPDATE_D2.map
 probe BNUPDATE_D2.pdb
 probe BNUPDATE_D2.sym
-probe Battle.snp
 probe CLIENT.dbg
 probe CLIENT.map
 probe CLIENT.pdb
@@ -199,7 +197,6 @@ probe COMMON_D2.dbg
 probe COMMON_D2.map
 probe COMMON_D2.pdb
 probe COMMON_D2.sym
-probe CheckRevision.mpq
 probe D2.lng
 probe D2BATTLE.dbg
 probe D2BATTLE.map
@@ -483,7 +480,6 @@ probe FOG_D2.pdb
 probe FOG_D2.sym
 probe GAME.dbg
 probe GAME.map
-probe GAME.pdb
 probe GAME.sym
 probe GAMED2.dbg
 probe GAMED2.map
@@ -662,8 +658,6 @@ probe SOUND_D2.map
 probe SOUND_D2.pdb
 probe SOUND_D2.sym
 probe STORM.dbg
-probe STORM.map
-probe STORM.pdb
 probe STORM.sym
 probe STORMD2.dbg
 probe STORMD2.map
@@ -701,7 +695,6 @@ probe Warden.dll
 probe autorun.exe
 probe autorun.inf
 probe bnetd.ini
-probe bnserver.ini
 probe changelog.txt
 probe changes.txt
 probe credits.txt
@@ -720,8 +713,6 @@ probe eula.txt
 probe faq.txt
 probe install.exe
 probe license.txt
-probe lockdown-IX86-00.mpq
-probe lockdown-IX86-01.mpq
 probe manual.pdf
 probe patch.txt
 probe readme.html
@@ -729,9 +720,6 @@ probe readme.rtf
 probe readme.txt
 probe scan.dll
 probe setup.exe
-probe ver-IX86-1.mpq
-probe ver-IX86-2.mpq
-probe ver-IX86-3.mpq
 probe version.txt
 probe warden.bin
 probe warden.mod
@@ -877,3 +865,46 @@ w3xp Game.dll
 w3xp Storm.pdb
 w3xp Mto.pdb
 w3xp Blizzard.pdb
+
+# --- architecture variants of the update MPQs (speculative: ARM / Apple-silicon
+#     and OSX-Intel platform codes alongside the known IX86/XMAC/PMAC)
+probe D2DV 1xx_114d_XARM_.mpq
+probe D2DV 1xx_114d_ARM_.mpq
+probe D2DV 1xx_114d_A64_.mpq
+probe D2DV 1xx_114d_ARM64_.mpq
+probe D2DV 1xx_114d_AARCH64_.mpq
+probe D2DV 1xx_114d_IARM_.mpq
+probe D2DV 1xx_114d_XA64_.mpq
+probe D2DV 1xx_114d_OSXI_.mpq
+probe D2XP 1xx_114d_XARM_.mpq
+probe D2XP 1xx_114d_ARM_.mpq
+probe D2XP 1xx_114d_A64_.mpq
+probe D2XP 1xx_114d_ARM64_.mpq
+probe D2XP 1xx_114d_AARCH64_.mpq
+probe D2XP 1xx_114d_IARM_.mpq
+probe D2XP 1xx_114d_XA64_.mpq
+probe D2XP 1xx_114d_OSXI_.mpq
+probe STAR 1xx_1161_XARM_.mpq
+probe STAR 1xx_1161_ARM_.mpq
+probe STAR 1xx_1161_A64_.mpq
+probe STAR 1xx_1161_ARM64_.mpq
+probe STAR 1xx_1161_AARCH64_.mpq
+probe STAR 1xx_1161_IARM_.mpq
+probe STAR 1xx_1161_XA64_.mpq
+probe STAR 1xx_1161_OSXI_.mpq
+probe SEXP 1xx_1161_XARM_.mpq
+probe SEXP 1xx_1161_ARM_.mpq
+probe SEXP 1xx_1161_A64_.mpq
+probe SEXP 1xx_1161_ARM64_.mpq
+probe SEXP 1xx_1161_AARCH64_.mpq
+probe SEXP 1xx_1161_IARM_.mpq
+probe SEXP 1xx_1161_XA64_.mpq
+probe SEXP 1xx_1161_OSXI_.mpq
+probe W2BN 1xx_2021_XARM_.mpq
+probe W2BN 1xx_2021_ARM_.mpq
+probe W2BN 1xx_2021_A64_.mpq
+probe W2BN 1xx_2021_ARM64_.mpq
+probe W2BN 1xx_2021_AARCH64_.mpq
+probe W2BN 1xx_2021_IARM_.mpq
+probe W2BN 1xx_2021_XA64_.mpq
+probe W2BN 1xx_2021_OSXI_.mpq
