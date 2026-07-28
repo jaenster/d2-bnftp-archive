@@ -1,0 +1,17 @@
+.{
+    .name = .d2_bnftp_poller,
+    .version = "0.1.0",
+    .minimum_zig_version = "0.16.0",
+    .fingerprint = 0x339ff8e3b0cb2af2,
+    .dependencies = .{
+        .clientless = .{
+            .url = "git+https://github.com/jaenster/d2-clientless.git#ab0f52fa4fa7bffc7bc3ebdf28ecd05b47c6457b",
+            .hash = "clientless-0.1.0-lyHu8uo6AwAp23VpUKiyRlenhHmcz7-bXzr5Pk9uPlLX",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}

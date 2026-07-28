@@ -1,0 +1,37 @@
+# Builds the poller image and pushes it to ghcr on any change to poller/.
+# The poller reads GIT_TOKEN + DISCORD_WEBHOOK_URL from a k8s secret at runtime,
+# never from the image, so this build needs no secrets beyond GITHUB_TOKEN.
+name: build-poller
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'poller/**'
+      - '.github/workflows/build-poller.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: poller
+          file: poller/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/jaenster/d2-bnftp-poller:latest
+            ghcr.io/jaenster/d2-bnftp-poller:${{ github.sha }}
