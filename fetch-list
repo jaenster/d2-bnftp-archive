@@ -1375,3 +1375,84 @@ probe W2BN_AAR6_1xx_2021.mpq
 probe W2BN_XA64_1xx_2021.mpq
 probe W2BN_X64M_1xx_2021.mpq
 probe W2BN_OSXI_1xx_2021.mpq
+
+# ==================================================================
+# Ghidra-derived probes (from the 1.14d Game.exe + D2R debug build)
+# ==================================================================
+# Confirmed: the 1.14d PDB is d:\diablo2\Diablo2\Exe\Release\Game.pdb
+#   -> Game.pdb (already probed). No personal usernames anywhere:
+#   classic build root is d:\diablo2\, D2R is a jenkins CI tree.
+#
+# Internal LoD codename is D2HELL (SOURCE\D2HELL\Src, D2Hell Fault.cpp):
+probe D2HELL.pdb
+probe D2HELL.map
+probe D2HELL.sym
+probe D2HELL.dbg
+probe D2HELL.mpq
+probe D2HELL.zip
+probe D2HELL.exe
+probe D2HELL.dll
+#
+# Game.pdb debug GUID + age from the RSDS record (Microsoft symbol-server
+# layout keys PDBs by GUID+age -> try the GUID as a filename):
+probe 4A206F288F5D4842B2A073B37F649ED81.pdb
+probe 4A206F288F5D4842B2A073B37F649ED8.pdb
+probe {4A206F28-8F5D-4842-B2A0-73B37F649ED8}.pdb
+probe Game.pdb.mpq
+probe Game.pdb.zip
+#
+# Local game-data MPQs the exe references (usually shipped with the game,
+# not served over BNFTP - long shots):
+probe d2exp.mpq
+probe d2data.mpq
+probe d2char.mpq
+probe patch_d2.mpq
+probe d2kfixup.mpq
+probe d2delta.mpq
+probe d2speech.mpq
+probe d2sfx.mpq
+probe d2music.mpq
+probe d2video.mpq
+probe d2Xvideo.mpq
+probe d2Xtalk.mpq
+probe d2Xmusic.mpq
+#
+# D2R uses protobuf (protobuf_blz in the jenkins paths). Generic + a few
+# real .proto schema names lifted from the D2R binary (near-zero on classic
+# BNFTP, but creative):
+probe protobuf.mpq
+probe protobuf.zip
+probe descriptor.proto
+probe d2r.proto
+probe d2.proto
+probe client_game_closed.proto
+probe client_game_opened.proto
+probe client_settings_updated.proto
+probe network_bgs_disconnect.proto
+probe network_bgs_login_attempt.proto
+probe network_d2rservices_login_attempt.proto
+probe game_act_updated.proto
+probe game_ended.proto
+probe game_started.proto
+probe game_quest_update.proto
+probe client_loading_screen_updated.proto
+probe game_player_died.proto
+probe common_item_detailed_state.proto
+probe item_transmogrified.proto
+probe item_bought.proto
+probe item_sold.proto
+probe item_repaired.proto
+probe client_keybindings_updated.proto
+#
+# Jenkins/CI leftovers (D2R built on jenkins; typical artifact filenames):
+probe build.xml
+probe config.xml
+probe changelog.xml
+probe nextBuildNumber
+probe lastBuild.xml
+probe workspace.zip
+probe archive.zip
+probe artifacts.zip
+probe build.tar.gz
+probe MANIFEST.MF
+probe buildinfo.json
