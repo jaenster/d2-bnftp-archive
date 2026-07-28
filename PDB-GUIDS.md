@@ -93,3 +93,22 @@ No Ghidra/IDA needed for the patch set:
 The live binaries' GUIDs were read the same way from their in-memory RSDS records; the Mac
 build carries a Mach-O `LC_UUID` load command instead.
 
+
+## Additions from the Classic `D2Patch` installers
+
+The Classic (`D2DV`) installers yielded `Fog.pdb` (not in the LoD extract) and a distinct
+`GameD2.pdb` per 1.14 build. The other DLLs are byte-identical to LoD (same GUID) - only the
+launcher `Game.exe` differs between Classic (`GameD2.pdb`) and LoD (`Game.pdb`).
+
+| version | module | pdb | guid |
+|-|-|-|-|
+| 1.11 | Fog | `Fog.pdb` | `189D172D-A8F2-4D2E-9148-95FFE61CD683` |
+| 1.11b | Fog | `Fog.pdb` | `8149173F-BC0B-463C-AA13-C944E6D9E7F1` |
+| 1.12a | Fog | `Fog.pdb` | `4D404599-F315-4B89-9E05-757597DB0D25` |
+| 1.13c | Fog | `Fog.pdb` | `382F7679-A0A4-4023-B4FF-9A71AE0804D1` |
+| 1.13d | Fog | `Fog.pdb` | `9B527A84-4CF8-48CE-8DF8-6B5CD450B9BE` |
+| 1.13c | D2Lang | `D2Lang.pdb` | `A534DF18-82E5-4839-9637-259F4107C029` |
+| 1.14a | Game (Classic) | `GameD2.pdb` | `138DAC7D-82F9-43D7-A65C-120D90DA93F6` |
+| 1.14b | Game (Classic) | `GameD2.pdb` | `B82E0D2D-8CB0-4D96-A328-DCAA5EB5AD4D` |
+| 1.14c | Game (Classic) | `GameD2.pdb` | `345B5CC5-B5EE-4CF1-8D58-CD8EB7062C48` |
+
