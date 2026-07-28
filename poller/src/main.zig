@@ -56,6 +56,8 @@ const forever_source = Source{
 const Pair = struct {
     source: *const Source,
     filename: []const u8,
+    attempts: usize,
+    is_probe: bool,
 };
 
 fn out(comptime fmt: []const u8, args: anytype) void {
@@ -104,17 +106,19 @@ fn readWholeFile(gpa: std.mem.Allocator, path: []const u8) ![]u8 {
 // Fetch one (source, filename) with retry-on-empty. For a multi-host source the
 // hosts are tried in order; the first that returns non-empty wins. Returns an
 // empty slice if every host/attempt failed.
-fn fetchPair(gpa: std.mem.Allocator, src: *const Source, filename: []const u8) []u8 {
+fn fetchPair(gpa: std.mem.Allocator, src: *const Source, filename: []const u8, attempts: usize) []u8 {
     var attempt: usize = 0;
-    while (attempt < max_retries) : (attempt += 1) {
+    while (attempt < attempts) : (attempt += 1) {
         for (src.hosts) |host| {
             const bytes = bnftp.fetch(gpa, host, bnftp_port, src.product, filename, .{}) catch |err| {
-                out("  {s}/{s} try {d}/{d} via {s}: error {s}\n", .{ src.name, filename, attempt + 1, max_retries, host, @errorName(err) });
+                if (attempts > 1)
+                    out("  {s}/{s} try {d}/{d} via {s}: error {s}\n", .{ src.name, filename, attempt + 1, attempts, host, @errorName(err) });
                 continue;
             };
             if (bytes.len > 0) return bytes;
         }
-        out("  {s}/{s} try {d}/{d}: 0 bytes\n", .{ src.name, filename, attempt + 1, max_retries });
+        if (attempts > 1)
+            out("  {s}/{s} try {d}/{d}: 0 bytes\n", .{ src.name, filename, attempt + 1, attempts });
     }
     return &.{};
 }
@@ -152,12 +156,20 @@ pub fn main(init: std.process.Init.Minimal) !void {
         if (line.len == 0 or line[0] == '#') continue;
         var it = std.mem.tokenizeAny(u8, line, " \t");
         const class = it.next() orelse continue;
-        const filename = it.next() orelse continue;
-        const fname = try gpa.dupe(u8, filename);
+        // filename is the remainder after the class token; BNFTP names can contain
+        // spaces (e.g. "Diablo II.pdb"), so take the rest of the line, not one token.
+        const rest = std.mem.trim(u8, line[class.len..], " \t");
+        if (rest.len == 0) continue;
+        const fname = try gpa.dupe(u8, rest);
         if (std.mem.eql(u8, class, "d2")) {
-            for (&d2_sources) |*s| try pairs.append(gpa, .{ .source = s, .filename = fname });
+            for (&d2_sources) |*s| try pairs.append(gpa, .{ .source = s, .filename = fname, .attempts = max_retries, .is_probe = false });
         } else if (std.mem.eql(u8, class, "forever")) {
-            try pairs.append(gpa, .{ .source = &forever_source, .filename = fname });
+            try pairs.append(gpa, .{ .source = &forever_source, .filename = fname, .attempts = max_retries, .is_probe = false });
+        } else if (std.mem.eql(u8, class, "probe")) {
+            // Speculative existence check against one gateway (useast), single try:
+            // most probes miss (0 bytes) so no retry and no 5x fan-out. A hit is
+            // staged like any useast file and surfaced by collect as a new find.
+            try pairs.append(gpa, .{ .source = &d2_sources[0], .filename = fname, .attempts = 1, .is_probe = true });
         } else {
             out("skipping unknown class \"{s}\" for {s}\n", .{ class, fname });
         }
@@ -167,8 +179,10 @@ pub fn main(init: std.process.Init.Minimal) !void {
     const cstage = try gpa.dupeZ(u8, stage_dir);
     _ = mkdir(cstage.ptr, 0o755);
 
-    var processed: usize = 0;
-    var failed: usize = 0;
+    var processed: usize = 0; // real (d2/forever) pairs attempted by this shard
+    var failed: usize = 0; // real pairs that produced no bytes (source not serving)
+    var probe_checked: usize = 0;
+    var probe_hit: usize = 0;
 
     // Per-file scratch: the fetched bytes (up to ~11MB per MPQ) and the path
     // strings live here and are released after each pair, so at most one file is
@@ -179,14 +193,18 @@ pub fn main(init: std.process.Init.Minimal) !void {
 
     for (pairs.items, 0..) |p, idx| {
         if (idx % shard_total != shard_index) continue;
-        processed += 1;
+        if (p.is_probe) probe_checked += 1 else processed += 1;
         defer _ = scratch.reset(.retain_capacity);
         const sa = scratch.allocator();
 
-        const bytes = fetchPair(sa, p.source, p.filename);
+        const bytes = fetchPair(sa, p.source, p.filename, p.attempts);
         if (bytes.len == 0) {
-            failed += 1;
-            out("FAILED {s}/{s} 0 bytes\n", .{ p.source.name, p.filename });
+            // A probe miss is the expected case - stay quiet. A real 0-byte means the
+            // source does not serve that file.
+            if (!p.is_probe) {
+                failed += 1;
+                out("FAILED {s}/{s} 0 bytes\n", .{ p.source.name, p.filename });
+            }
             continue;
         }
 
@@ -194,11 +212,16 @@ pub fn main(init: std.process.Init.Minimal) !void {
         _ = mkdir(srcdir.ptr, 0o755);
         const dst = try std.fmt.allocPrintSentinel(sa, "{s}/{s}/{s}", .{ stage_dir, p.source.name, p.filename }, 0);
         writeFileZ(dst.ptr, bytes) catch |werr| {
-            failed += 1;
+            if (!p.is_probe) failed += 1;
             out("FAILED {s}/{s}: write error {s}\n", .{ p.source.name, p.filename, @errorName(werr) });
             continue;
         };
-        out("ok {s}/{s} {d} bytes\n", .{ p.source.name, p.filename, bytes.len });
+        if (p.is_probe) {
+            probe_hit += 1;
+            out("PROBE HIT {s}/{s} {d} bytes\n", .{ p.source.name, p.filename, bytes.len });
+        } else {
+            out("ok {s}/{s} {d} bytes\n", .{ p.source.name, p.filename, bytes.len });
+        }
     }
 
     // A 0-byte BNFTP reply means the source does not host that file (the classic
@@ -207,6 +230,8 @@ pub fn main(init: std.process.Init.Minimal) !void {
     // collect only places sources that produced bytes. Only fail the shard if it
     // staged nothing at all, which signals a real connectivity/DNS problem.
     const staged = processed - failed;
-    out("shard {d}/{d} done: {d} staged, {d} not served (of {d} pairs)\n", .{ shard_index, shard_total, staged, failed, processed });
+    out("shard {d}/{d} done: {d} staged, {d} not served (of {d} real pairs); probes: {d} checked, {d} hit\n", .{ shard_index, shard_total, staged, failed, processed, probe_checked, probe_hit });
+    // Only a total wipeout of the REAL fetches signals a connectivity/DNS problem;
+    // probe misses are expected and never fail the shard.
     if (processed > 0 and staged == 0) std.process.exit(1);
 }

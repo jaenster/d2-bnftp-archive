@@ -102,35 +102,55 @@ Protocol selectors probed - dead / gated:
 
 ## Keeping this current
 
-The files under `files/` are re-fetched by a multi-source Kubernetes poller
-(`d2-bnftp-poller`) on a weekly schedule. It builds the
-[d2-clientless](https://github.com/jaenster/d2-clientless) BNFTP client and fetches every file in
-[`fetch-list`](fetch-list) from several live Battle.net sources, then compares and commits any
-changes. It runs as a 3-shard Indexed Job (one pod per node, so three distinct egress IPs) that
-fetches `(file, source)` pairs in parallel; a coordinator then compares the results and places
-them.
+The files under `files/` are re-fetched **automatically every 6 hours** by a multi-source
+Kubernetes poller (`d2-bnftp-poller`, source in [`poller/`](poller/)). It builds the
+[d2-clientless](https://github.com/jaenster/d2-clientless) BNFTP client and fetches every entry in
+[`fetch-list`](fetch-list) from the live Battle.net gateways, compares them, and **commits only
+when something actually changed**. It runs as a 3-shard DAG (one pod per node, so three distinct
+egress IPs) fetching `(file, source)` pairs in parallel; a coordinator then compares, places, and
+pushes.
 
-Each `fetch-list` line is `<class> <filename>`:
+### Realms (sources)
 
-- `d2` files are fetched from all five D2 sources - the named gateways
-  `useast` / `uswest` / `asia` / `europe` (product D2XP) plus `vegas`, the unnamed Las Vegas
-  gateway IP pool - and compared byte for byte.
-- `forever` files are fetched only from `connect-forever.classic.blizzard.com`, which serves the
-  Diablo-1 + PowerPC-Mac legacy set.
+Each classic gateway is probed as its own source so per-region differences surface:
 
-Placement:
+| source | host | what it is |
+|-|-|-|
+| `useast` | useast.battle.net | US-East named classic gateway (product D2XP) |
+| `uswest` | uswest.battle.net | US-West named classic gateway |
+| `asia` | asia.battle.net | Asia named classic gateway |
+| `europe` | europe.battle.net | Europe named classic gateway |
+| `vegas` | 158.115.218.65 / .77 / .106 | raw IP pool the live classic gateways answer from (see below) |
+| `forever` | connect-forever.classic.blizzard.com | the parked "connect forever" gateway; serves the Diablo-1 + PowerPC-Mac legacy set |
 
-- A `d2` file that is byte-identical across all sources is written to the canonical path
-  `files/<filename>`.
-- A `d2` file that differs between sources is written per source to `files/<source>/<filename>`
-  (for every source), and the canonical copy is removed.
-- `forever` files are always written to `files/forever/<filename>`.
+**About `vegas`.** The four named regional hostnames all resolve into a single block of IPs in a
+Las Vegas datacenter (`158.115.218.x`): classic Battle.net has been consolidated onto one set of
+gateways rather than genuinely separate per-region servers. We include those raw IPs as their own
+source and connect to them directly, bypassing the regional DNS names, to check whether the raw
+gateway serves anything different from what the named `*.battle.net` entries return. In practice the
+game files match across all of them; the region-specific `bnserver.ini` and the localized `tos*.txt`
+are where the gateways actually differ.
 
-`SHA256SUMS` is regenerated recursively over `files/**` (a diff there is the diff of the archive).
-[`REALM-DIVERGENCE.md`](REALM-DIVERGENCE.md) lists every file that is not in the canonical
-`files/` - i.e. the per-source divergent files and the legacy set - with its per-source sha256.
-`LAST-FETCHED.txt` records when the pipeline last ran. If nothing changed, it commits nothing. The
-poller streams its progress and any divergences to a Discord webhook.
+### Adding a file to the list
+
+To have the archive track another file, add a line to [`fetch-list`](fetch-list):
+`<class> <filename>`. Filenames may contain spaces (e.g. `Diablo II.pdb`); blank lines and lines
+starting with `#` are ignored. The class picks how it is fetched:
+
+- `d2` - fetch from all five D2 gateways and compare. Byte-identical across all five -> canonical
+  `files/<filename>`; any difference -> per-source `files/<source>/<filename>`. Use this for files
+  you expect Blizzard to serve.
+- `forever` - fetch only from `connect-forever...`; always written to `files/forever/<filename>`.
+  For the Diablo-1 / PowerPC-Mac legacy set.
+- `probe` - a speculative existence check: fetched once from `useast` only, no retry. Most probes
+  miss and cost almost nothing; if the gateway actually serves it, the file is committed and the
+  hit is flagged. The list already carries a large batch of candidate debug-symbol names
+  (`*.pdb` / `*.map` / `*.sym` for every D2 module) on the off chance Blizzard ever exposes them.
+
+The next scheduled run (every 6 hours) - or a manual trigger - picks up the new line. `SHA256SUMS`
+is regenerated recursively over `files/**`, so a diff there is the diff of the archive. A run with
+no changes commits nothing; either way it streams a summary - committed changes, new/resolved
+cross-realm divergences, probe hits, and any errors - to a Discord webhook.
 
 
 ## Provenance & legal

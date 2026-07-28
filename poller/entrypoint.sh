@@ -3,19 +3,19 @@
 #
 # Usage: entrypoint.sh <clone|fetch|collect>
 #
-# The weekly CronWorkflow runs a clone -> fetch(x3) -> collect DAG; Argo's DAG
-# dependencies handle ordering, so there is no shared-PVC barrier. All three
-# roles share a RWX PVC mounted at /work:
+# The CronWorkflow runs a clone -> fetch(x3) -> collect DAG; Argo's DAG
+# dependencies handle ordering. All three roles share a RWX PVC mounted at /work:
 #   clone   - fresh clone of the archive repo into /work/repo (needs GIT_TOKEN)
 #   fetch   - the Zig poller fetches this shard's (file,source) pairs into
 #             /work/stage/<source>/<filename> (SHARD_INDEX/SHARD_TOTAL). The three
-#             fetch pods land on distinct nodes (podAntiAffinity) -> distinct
-#             egress IPs.
-#   collect - compare + placement + SHA256SUMS + REALM-DIVERGENCE.md + commit +
-#             push (needs GIT_TOKEN).
+#             fetch pods land on distinct nodes (podAntiAffinity) -> distinct IPs.
+#   collect - compare + placement + commit + push (needs GIT_TOKEN).
 #
-# Each role's stdout/stderr is piped through the batched Discord sender (batch.sh)
-# when DISCORD_WEBHOOK_URL is set; otherwise it goes to stdout only.
+# Discord: instead of streaming every line, roles post only meaningful events via
+# discord() - a committed change (diff + commit link), new/resolved cross-realm
+# divergences, a probe hit (a speculative filename Blizzard actually serves),
+# errors/anomalies, and a heartbeat on no-change runs. Everything still goes to
+# the pod log (stdout) for debugging.
 set -uo pipefail
 
 WORK=/work
@@ -23,21 +23,68 @@ REPO="$WORK/repo"
 STAGE="$WORK/stage"
 TOTAL="${SHARD_TOTAL:-3}"
 REPO_URL="github.com/jaenster/d2-bnftp-archive.git"
+GH_REPO="jaenster/d2-bnftp-archive"
 FETCH_LIST_PATH="$REPO/fetch-list"
 D2_SOURCES="useast uswest asia europe vegas"
-HERE="$(cd "$(dirname "$0")" && pwd)"
 
 ROLE="${1:-}"
 
 log() { echo "[$ROLE] $*"; }
 
+json_str() {
+  # Emit a JSON string literal (quotes included) for arbitrary text.
+  local s="$1"
+  s="${s//\\/\\\\}"; s="${s//\"/\\\"}"; s="${s//$'\r'/}"
+  s="${s//$'\t'/\\t}"; s="${s//$'\n'/\\n}"
+  printf '"%s"' "$s"
+}
+
+discord_post() {
+  # POST one <=2000-char message as plain markdown (so links stay clickable),
+  # honoring HTTP 429 retry_after.
+  local content="$1"
+  [ -z "$content" ] && return 0
+  local payload attempt=0 resp code retry body
+  payload="$(printf '{"username":"d2-bnftp-poller","content":%s}' "$(json_str "$content")")"
+  while [ "$attempt" -lt 5 ]; do
+    resp="$(curl -sS -w $'\n%{http_code}' -H 'Content-Type: application/json' \
+      -X POST -d "$payload" "$DISCORD_WEBHOOK_URL" 2>/dev/null)"
+    code="${resp##*$'\n'}"
+    if [ "$code" = "429" ]; then
+      body="${resp%$'\n'*}"
+      retry="$(printf '%s' "$body" | grep -o '"retry_after"[: ]*[0-9.]*' | grep -o '[0-9.]*' | head -1)"
+      [ -z "$retry" ] && retry=1
+      sleep "$retry"; attempt=$((attempt + 1)); continue
+    fi
+    return 0
+  done
+}
+
+discord() {
+  # Log a discrete event: always to the pod log, and to Discord (chunked to
+  # ~1900 chars on line boundaries) when DISCORD_WEBHOOK_URL is set.
+  local msg="$1"
+  printf '%s\n' "$msg"
+  [ -n "${DISCORD_WEBHOOK_URL:-}" ] || return 0
+  local chunk="" line
+  while IFS= read -r line; do
+    if [ -n "$chunk" ] && [ $(( ${#chunk} + ${#line} + 1 )) -ge 1900 ]; then
+      discord_post "$chunk"; chunk=""
+    fi
+    if [ -z "$chunk" ]; then chunk="$line"; else chunk="$chunk"$'\n'"$line"; fi
+  done <<< "$msg"
+  [ -n "$chunk" ] && discord_post "$chunk"
+}
+
 role_clone() {
   log "clone: fresh clone of the archive repo"
   if [ -z "${GIT_TOKEN:-}" ]; then
-    log "GIT_TOKEN is not set"; return 2
+    discord "ERROR: clone role has no GIT_TOKEN"; return 2
   fi
   rm -rf "$REPO" "$STAGE"
-  git clone "https://x-access-token:${GIT_TOKEN}@${REPO_URL}" "$REPO"
+  if ! git clone "https://x-access-token:${GIT_TOKEN}@${REPO_URL}" "$REPO"; then
+    discord "ERROR: clone of $GH_REPO failed"; return 1
+  fi
   git -C "$REPO" config user.email "d2-bnftp-poller@users.noreply.github.com"
   git -C "$REPO" config user.name "d2-bnftp-poller"
   mkdir -p "$STAGE"
@@ -56,24 +103,44 @@ role_fetch() {
     d2-bnftp-poller
   local rc=$?
   log "fetch: shard $idx exited rc=$rc"
+  if [ "$rc" -ne 0 ]; then
+    discord "ERROR: fetch shard $idx/$TOTAL staged nothing (IP blocked / DNS / gateway down?)"
+  fi
   return "$rc"
 }
 
 role_collect() {
   log "collect: compare + place over stage"
   if [ -z "${GIT_TOKEN:-}" ]; then
-    log "GIT_TOKEN is not set"; return 2
+    discord "ERROR: collect role has no GIT_TOKEN"; return 2
   fi
   cd "$REPO"
   mkdir -p files
-  local divergent=0
 
-  # Placement over the staged bytes.
-  while read -r class filename rest; do
+  # Pre-run divergence set: basenames currently under the 5 d2 per-source dirs.
+  ( cd files && find $D2_SOURCES -type f 2>/dev/null | sed 's|.*/||' | LC_ALL=C sort -u ) > "$WORK/.old_div" 2>/dev/null || : > "$WORK/.old_div"
+
+  local probe_hits=""
+
+  # Placement over the staged bytes. Two-field read so a filename with spaces
+  # ("Diablo II.pdb") lands whole in $filename.
+  while read -r class filename; do
     case "$class" in
       ""|\#*) continue ;;
     esac
     [ -z "${filename:-}" ] && continue
+
+    if [ "$class" = "probe" ]; then
+      # Speculative name. If useast actually served it, it is a real find - keep it
+      # at the canonical path and remember it for the Discord alert.
+      local ph="$STAGE/useast/$filename"
+      if [ -s "$ph" ]; then
+        cp "$ph" "files/$filename"
+        probe_hits="$probe_hits $filename"
+        log "PROBE HIT $filename (served by useast)"
+      fi
+      continue
+    fi
 
     if [ "$class" = "forever" ]; then
       local src="$STAGE/forever/$filename"
@@ -123,7 +190,6 @@ role_collect() {
     else
       # Divergence (or a source missing bytes) -> per-source copies for every
       # source that produced bytes; drop the canonical copy.
-      divergent=$((divergent + 1))
       log "DIVERGENCE d2/$filename (present:$present identical=$identical have=$have)"
       rm -f "files/$filename"
       for s in $D2_SOURCES; do
@@ -149,57 +215,58 @@ role_collect() {
     : > SHA256SUMS
   fi
 
-  write_divergence_report
-  echo "$(date -u +%FT%TZ) fetched via 3-shard Argo Workflows multi-source poller" > LAST-FETCHED.txt
+  # Post-run divergence set + per-gateway liveness.
+  ( cd files && find $D2_SOURCES -type f 2>/dev/null | sed 's|.*/||' | LC_ALL=C sort -u ) > "$WORK/.new_div" 2>/dev/null || : > "$WORK/.new_div"
+  local down=""
+  for s in $D2_SOURCES; do
+    local cnt
+    cnt=$(find "$STAGE/$s" -type f 2>/dev/null | wc -l | tr -d ' ')
+    [ "${cnt:-0}" -eq 0 ] && down="$down $s"
+  done
 
-  if [ -n "$(git status --porcelain)" ]; then
-    log "changes detected, committing ($divergent divergent d2 file(s))"
-    git add -A
-    git commit -m "refetch: update changed BNFTP files ($(date -u +%F))"
-    git push
-    log "pushed"
-  else
-    log "no changes; nothing to commit ($divergent divergent d2 file(s))"
+  local nfiles ndiv
+  nfiles=$(find files -type f 2>/dev/null | wc -l | tr -d ' ')
+  ndiv=$(wc -l < "$WORK/.new_div" | tr -d ' ')
+
+  # Anomaly lines shared by the change/no-change/push-fail messages.
+  local anomalies=""
+  [ -n "$down" ] && anomalies="${anomalies}WARNING: gateway served nothing:$down"$'\n'
+  [ -n "$probe_hits" ] && anomalies="${anomalies}NEW FILE SERVED (probe hit):$probe_hits"$'\n'
+
+  git add -A
+  local namestatus
+  namestatus="$(git diff --cached --name-status)"
+
+  if [ -z "$namestatus" ]; then
+    local hb="poller ran: no changes ($nfiles files, $ndiv divergent across realms)"
+    [ -n "$anomalies" ] && hb="$hb"$'\n'"$anomalies"
+    discord "$hb"
+    return 0
   fi
-  return 0
-}
 
-write_divergence_report() {
-  # List every file NOT in canonical files/ (i.e. under a per-source subdir) with
-  # its per-source sha256.
-  local md="REALM-DIVERGENCE.md"
-  {
-    echo "# Realm divergence report"
-    echo
-    echo "Generated $(date -u +%FT%TZ) by the 3-shard Argo Workflows multi-source poller."
-    echo
-    echo "Files here were NOT byte-identical across all D2 sources, plus the"
-    echo "forever-only legacy set. Byte-identical D2 files live at the canonical"
-    echo "path files/<filename> and are omitted below."
-    echo
-    local subfiles
-    subfiles="$( (cd files 2>/dev/null && find . -mindepth 2 -type f 2>/dev/null | sed 's|^\./||' | LC_ALL=C sort) || true)"
-    if [ -z "$subfiles" ]; then
-      echo "No divergences. Every D2 file was identical across all sources."
-    else
-      local names
-      names="$(echo "$subfiles" | awk -F/ '{print $NF}' | LC_ALL=C sort -u)"
-      echo "$names" | while read -r name; do
-        [ -z "$name" ] && continue
-        echo "## $name"
-        echo
-        echo "| source | sha256 |"
-        echo "|-|-|"
-        for s in $D2_SOURCES forever; do
-          local fp="files/$s/$name"
-          if [ -s "$fp" ]; then
-            printf '| %s | %s |\n' "$s" "$(sha256sum "$fp" | awk '{print $1}')"
-          fi
-        done
-        echo
-      done
-    fi
-  } > "$md"
+  git commit -q -m "refetch: update changed BNFTP files ($(date -u +%F))"
+  if ! git push -q; then
+    discord "ERROR: git push to $GH_REPO failed (commit $(git rev-parse --short HEAD) is local only)"$'\n'"$anomalies"
+    return 1
+  fi
+
+  local hash a m d newdiv resdiv changed
+  hash="$(git rev-parse --short HEAD)"
+  a=$(printf '%s\n' "$namestatus" | grep -c '^A')
+  m=$(printf '%s\n' "$namestatus" | grep -c '^M')
+  d=$(printf '%s\n' "$namestatus" | grep -c '^D')
+  newdiv="$(comm -13 "$WORK/.old_div" "$WORK/.new_div" | tr '\n' ' ')"
+  resdiv="$(comm -23 "$WORK/.old_div" "$WORK/.new_div" | tr '\n' ' ')"
+  changed="$(printf '%s\n' "$namestatus" | sed 's/\t/ /g' | head -25)"
+
+  local msg="**$GH_REPO updated** ([\`$hash\`](https://github.com/$GH_REPO/commit/$hash))"
+  msg="$msg"$'\n'"+$a new  ~$m changed  -$d removed"
+  [ -n "${newdiv// }" ] && msg="$msg"$'\n'"new divergence across realms: $newdiv"
+  [ -n "${resdiv// }" ] && msg="$msg"$'\n'"divergence resolved: $resdiv"
+  [ -n "$anomalies" ] && msg="$msg"$'\n'"$anomalies"
+  msg="$msg"$'\n'"files:"$'\n'"$changed"
+  discord "$msg"
+  return 0
 }
 
 dispatch() {
@@ -214,11 +281,5 @@ dispatch() {
   esac
 }
 
-# --- Discord-batched output wrapper ---------------------------------------------
-if [ -n "${DISCORD_WEBHOOK_URL:-}" ]; then
-  dispatch 2>&1 | "$HERE/batch.sh"
-  exit "${PIPESTATUS[0]}"
-else
-  dispatch
-  exit $?
-fi
+dispatch
+exit $?

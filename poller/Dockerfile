@@ -23,6 +23,5 @@ FROM alpine:3.20
 RUN apk add --no-cache git ca-certificates bash curl coreutils
 COPY --from=build /src/zig-out/bin/d2-bnftp-poller /usr/local/bin/d2-bnftp-poller
 COPY entrypoint.sh /entrypoint.sh
-COPY batch.sh /batch.sh
-RUN chmod +x /entrypoint.sh /batch.sh
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
