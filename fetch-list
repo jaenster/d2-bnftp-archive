@@ -866,45 +866,46 @@ w3xp Storm.pdb
 w3xp Mto.pdb
 w3xp Blizzard.pdb
 
+
 # --- architecture variants of the update MPQs (speculative: ARM / Apple-silicon
 #     and OSX-Intel platform codes alongside the known IX86/XMAC/PMAC)
-probe D2DV 1xx_114d_XARM_.mpq
-probe D2DV 1xx_114d_ARM_.mpq
-probe D2DV 1xx_114d_A64_.mpq
-probe D2DV 1xx_114d_ARM64_.mpq
-probe D2DV 1xx_114d_AARCH64_.mpq
-probe D2DV 1xx_114d_IARM_.mpq
-probe D2DV 1xx_114d_XA64_.mpq
-probe D2DV 1xx_114d_OSXI_.mpq
-probe D2XP 1xx_114d_XARM_.mpq
-probe D2XP 1xx_114d_ARM_.mpq
-probe D2XP 1xx_114d_A64_.mpq
-probe D2XP 1xx_114d_ARM64_.mpq
-probe D2XP 1xx_114d_AARCH64_.mpq
-probe D2XP 1xx_114d_IARM_.mpq
-probe D2XP 1xx_114d_XA64_.mpq
-probe D2XP 1xx_114d_OSXI_.mpq
-probe STAR 1xx_1161_XARM_.mpq
-probe STAR 1xx_1161_ARM_.mpq
-probe STAR 1xx_1161_A64_.mpq
-probe STAR 1xx_1161_ARM64_.mpq
-probe STAR 1xx_1161_AARCH64_.mpq
-probe STAR 1xx_1161_IARM_.mpq
-probe STAR 1xx_1161_XA64_.mpq
-probe STAR 1xx_1161_OSXI_.mpq
-probe SEXP 1xx_1161_XARM_.mpq
-probe SEXP 1xx_1161_ARM_.mpq
-probe SEXP 1xx_1161_A64_.mpq
-probe SEXP 1xx_1161_ARM64_.mpq
-probe SEXP 1xx_1161_AARCH64_.mpq
-probe SEXP 1xx_1161_IARM_.mpq
-probe SEXP 1xx_1161_XA64_.mpq
-probe SEXP 1xx_1161_OSXI_.mpq
-probe W2BN 1xx_2021_XARM_.mpq
-probe W2BN 1xx_2021_ARM_.mpq
-probe W2BN 1xx_2021_A64_.mpq
-probe W2BN 1xx_2021_ARM64_.mpq
-probe W2BN 1xx_2021_AARCH64_.mpq
-probe W2BN 1xx_2021_IARM_.mpq
-probe W2BN 1xx_2021_XA64_.mpq
-probe W2BN 1xx_2021_OSXI_.mpq
+probe D2DV_XARM_1xx_114d.mpq
+probe D2DV_ARM_1xx_114d.mpq
+probe D2DV_A64_1xx_114d.mpq
+probe D2DV_ARM64_1xx_114d.mpq
+probe D2DV_AARCH64_1xx_114d.mpq
+probe D2DV_IARM_1xx_114d.mpq
+probe D2DV_XA64_1xx_114d.mpq
+probe D2DV_OSXI_1xx_114d.mpq
+probe D2XP_XARM_1xx_114d.mpq
+probe D2XP_ARM_1xx_114d.mpq
+probe D2XP_A64_1xx_114d.mpq
+probe D2XP_ARM64_1xx_114d.mpq
+probe D2XP_AARCH64_1xx_114d.mpq
+probe D2XP_IARM_1xx_114d.mpq
+probe D2XP_XA64_1xx_114d.mpq
+probe D2XP_OSXI_1xx_114d.mpq
+probe STAR_XARM_1xx_1161.mpq
+probe STAR_ARM_1xx_1161.mpq
+probe STAR_A64_1xx_1161.mpq
+probe STAR_ARM64_1xx_1161.mpq
+probe STAR_AARCH64_1xx_1161.mpq
+probe STAR_IARM_1xx_1161.mpq
+probe STAR_XA64_1xx_1161.mpq
+probe STAR_OSXI_1xx_1161.mpq
+probe SEXP_XARM_1xx_1161.mpq
+probe SEXP_ARM_1xx_1161.mpq
+probe SEXP_A64_1xx_1161.mpq
+probe SEXP_ARM64_1xx_1161.mpq
+probe SEXP_AARCH64_1xx_1161.mpq
+probe SEXP_IARM_1xx_1161.mpq
+probe SEXP_XA64_1xx_1161.mpq
+probe SEXP_OSXI_1xx_1161.mpq
+probe W2BN_XARM_1xx_2021.mpq
+probe W2BN_ARM_1xx_2021.mpq
+probe W2BN_A64_1xx_2021.mpq
+probe W2BN_ARM64_1xx_2021.mpq
+probe W2BN_AARCH64_1xx_2021.mpq
+probe W2BN_IARM_1xx_2021.mpq
+probe W2BN_XA64_1xx_2021.mpq
+probe W2BN_OSXI_1xx_2021.mpq
