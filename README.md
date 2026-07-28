@@ -71,6 +71,16 @@ suffix is the version range they bridge).
 | `tos*.txt` | Terms of Service, 9 languages (USA, BRA, DEU, ESP, FRA, ITA, JPN, POL, default) |
 
 
+## Diablo II patch installers & debug identifiers
+
+Two reference docs cover the historical patch installers (a separate distribution channel from
+BNFTP) and the debug metadata pulled out of them:
+
+- [`PATCHES.md`](PATCHES.md) - Blizzard's live public download server for every released D2 patch
+  installer (`D2Patch_*` / `LODPatch_*`), with the full map of which versions resolve.
+- [`PDB-GUIDS.md`](PDB-GUIDS.md) - per-version PDB / debug GUIDs for the D2 binaries, extracted from
+  the MPQ payload inside those installers (no debugger needed).
+
 ## Verifying
 
 ```sh
