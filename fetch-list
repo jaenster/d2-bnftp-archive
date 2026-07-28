@@ -1651,3 +1651,19 @@ probe mach_star.tar
 probe mach_star.tar.gz
 probe mach_star.tgz
 probe mach_star.zip
+
+# --- extensionless probes (bare GUID + names; symbol stores/CDNs key on bare ids)
+probe 4A206F288F5D4842B2A073B37F649ED8
+probe 4A206F288F5D4842B2A073B37F649ED81
+probe D2HELL
+probe Diablo2
+probe DiabloAll
+probe DiabloII
+probe Game
+probe MacShell
+probe MacSpecific
+probe StormMac
+probe bclemetson
+probe crashy
+probe gamed2
+probe {4A206F28-8F5D-4842-B2A0-73B37F649ED8}
