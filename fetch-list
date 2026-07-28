@@ -1485,3 +1485,6 @@ probe crashy.pdb
 probe crashy.tar.gz
 probe crashy.7z
 probe crashy.rar
+
+# --- more codename/container probes (project names x archive formats,
+#     including Mac disk-image/installer containers for the Mac build)
