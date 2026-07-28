@@ -264,8 +264,19 @@ role_collect() {
   fi
 
   git commit -q -m "refetch: update changed BNFTP files ($(date -u +%F))"
-  if ! git push -q; then
-    discord "ERROR: git push to $GH_REPO failed (commit $(git rev-parse --short HEAD) is local only)"$'\n'"$anomalies"
+  # A run takes many minutes and the archive repo may have moved meanwhile (e.g.
+  # fetch-list edits), so a plain push can hit a non-fast-forward. Rebase onto the
+  # remote and retry a few times; bail if a rebase actually conflicts.
+  local pushed=0
+  for attempt in 1 2 3 4 5; do
+    if git push -q 2>/dev/null; then pushed=1; break; fi
+    if ! git pull -q --rebase origin main 2>/dev/null; then
+      git rebase --abort 2>/dev/null
+      break
+    fi
+  done
+  if [ "$pushed" -ne 1 ]; then
+    discord "ERROR: git push to $GH_REPO failed after retries (commit $(git rev-parse --short HEAD) is local only)"$'\n'"$anomalies"
     return 1
   fi
 
