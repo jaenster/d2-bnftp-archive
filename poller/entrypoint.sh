@@ -157,10 +157,10 @@ role_collect() {
       continue
     fi
 
-    if [ "$class" != "d2" ] && [ "$class" != "probe" ]; then
-      log "WARN unknown class $class for $filename"
-      continue
-    fi
+    case "$class" in
+      d2|probe|star|bw|war2|war3|w3xp) ;;
+      *) log "WARN unknown class $class for $filename"; continue ;;
+    esac
 
     # d2 and probe share this path: gather the gateways that produced bytes and
     # decide identical vs divergent. (A probe hit on even one gateway is a find;

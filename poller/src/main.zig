@@ -40,12 +40,34 @@ const Source = struct {
     product: []const u8,
 };
 
-const d2_sources = [_]Source{
-    .{ .name = "useast", .hosts = &.{"useast.battle.net"}, .product = "D2XP" },
-    .{ .name = "uswest", .hosts = &.{"uswest.battle.net"}, .product = "D2XP" },
-    .{ .name = "asia", .hosts = &.{"asia.battle.net"}, .product = "D2XP" },
-    .{ .name = "europe", .hosts = &.{"europe.battle.net"}, .product = "D2XP" },
-    .{ .name = "vegas", .hosts = &.{ "158.115.218.65", "158.115.218.77", "158.115.218.106" }, .product = "D2XP" },
+// The same five gateways answer for every classic product; only the request's
+// product 4CC changes, so each product-class reuses this gateway list.
+fn gateways(comptime product: []const u8) [5]Source {
+    return .{
+        .{ .name = "useast", .hosts = &.{"useast.battle.net"}, .product = product },
+        .{ .name = "uswest", .hosts = &.{"uswest.battle.net"}, .product = product },
+        .{ .name = "asia", .hosts = &.{"asia.battle.net"}, .product = product },
+        .{ .name = "europe", .hosts = &.{"europe.battle.net"}, .product = product },
+        .{ .name = "vegas", .hosts = &.{ "158.115.218.65", "158.115.218.77", "158.115.218.106" }, .product = product },
+    };
+}
+
+const d2_sources = gateways("D2XP");
+const star_sources = gateways("STAR"); // StarCraft
+const bw_sources = gateways("SEXP"); // Brood War
+const war2_sources = gateways("W2BN"); // WarCraft II BNE
+const war3_sources = gateways("WAR3"); // WarCraft III RoC
+const w3xp_sources = gateways("W3XP"); // WarCraft III Frozen Throne
+
+// fetch-list classes that fetch a filename from the 5 gateways under one product.
+const ProductClass = struct { name: []const u8, sources: []const Source };
+const product_classes = [_]ProductClass{
+    .{ .name = "d2", .sources = &d2_sources },
+    .{ .name = "star", .sources = &star_sources },
+    .{ .name = "bw", .sources = &bw_sources },
+    .{ .name = "war2", .sources = &war2_sources },
+    .{ .name = "war3", .sources = &war3_sources },
+    .{ .name = "w3xp", .sources = &w3xp_sources },
 };
 
 const forever_source = Source{
@@ -166,8 +188,16 @@ pub fn main(init: std.process.Init.Minimal) !void {
         const rest = std.mem.trim(u8, line[class.len..], " \t");
         if (rest.len == 0) continue;
         const fname = try gpa.dupe(u8, rest);
-        if (std.mem.eql(u8, class, "d2")) {
-            for (&d2_sources) |*s| try pairs.append(gpa, .{ .source = s, .filename = fname, .attempts = max_retries, .is_probe = false });
+        var matched = false;
+        for (product_classes) |pc| {
+            if (std.mem.eql(u8, class, pc.name)) {
+                for (pc.sources) |*s| try pairs.append(gpa, .{ .source = s, .filename = fname, .attempts = max_retries, .is_probe = false });
+                matched = true;
+                break;
+            }
+        }
+        if (matched) {
+            // handled above
         } else if (std.mem.eql(u8, class, "forever")) {
             try pairs.append(gpa, .{ .source = &forever_source, .filename = fname, .attempts = max_retries, .is_probe = false });
         } else if (std.mem.eql(u8, class, "probe")) {
