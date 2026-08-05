@@ -1,5 +1,7 @@
 # Battle.net classic BNFTP archive (Diablo / Diablo II)
 
+[![Discord](https://img.shields.io/badge/Discord-join%20the%20chat-5865F2?logo=discord&logoColor=white)](https://discord.gg/MHK2Dg9)
+
 A snapshot of **every file Blizzard's classic-games login servers serve over BNFTP** - the
 unauthenticated Battle.net File Transfer protocol - captured by live-probing `*.battle.net:6112`
 in 2026.
