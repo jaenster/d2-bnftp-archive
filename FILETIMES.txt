@@ -14,7 +14,6 @@ files/asia/tos_FRA.txt	2026-01-09T09:54:42Z
 files/asia/tos_ITA.txt	2026-01-09T09:54:42Z
 files/asia/tos_JPN.txt	2026-01-09T09:54:42Z
 files/asia/tos_USA.txt	2026-01-09T09:54:42Z
-files/asia/ver-IX86-5.mpq	2026-01-09T09:54:42Z
 files/europe/bnserver-WAR3.ini	2026-04-23T00:30:32Z
 files/europe/bnserver.ini	2026-04-23T00:30:32Z
 files/europe/bnserver.ini	2026-04-23T00:30:32Z
@@ -26,7 +25,6 @@ files/europe/tos_FRA.txt	2026-04-23T00:30:44Z
 files/europe/tos_ITA.txt	2026-04-23T00:30:44Z
 files/europe/tos_JPN.txt	2026-04-23T00:30:44Z
 files/europe/tos_USA.txt	2026-04-23T00:30:44Z
-files/europe/ver-IX86-5.mpq	2026-04-23T00:30:44Z
 files/forever/DRTL_IX86_108_109.mpq	2001-05-29T17:20:18Z
 files/forever/DRTL_PMAC_108_109.mpq	2001-05-29T17:20:20Z
 files/forever/DSHR_IX86_108_109.mpq	2001-05-29T17:20:22Z
@@ -120,7 +118,6 @@ files/uswest/tos_FRA.txt	2026-01-09T09:54:42Z
 files/uswest/tos_ITA.txt	2026-01-09T09:54:42Z
 files/uswest/tos_JPN.txt	2026-01-09T09:54:42Z
 files/uswest/tos_USA.txt	2026-01-09T09:54:42Z
-files/uswest/ver-IX86-5.mpq	2026-01-09T09:54:42Z
 files/vegas/bnserver.ini	2026-01-15T19:21:54Z
 files/vegas/bnserver.ini	2026-01-15T19:21:54Z
 files/vegas/tos.txt	2026-01-15T19:21:54Z
@@ -131,12 +128,12 @@ files/vegas/tos_FRA.txt	2026-01-15T19:21:52Z
 files/vegas/tos_ITA.txt	2026-01-15T19:21:54Z
 files/vegas/tos_JPN.txt	2026-01-15T19:21:54Z
 files/vegas/tos_USA.txt	2026-01-15T19:21:54Z
-files/vegas/ver-IX86-5.mpq	2026-01-15T19:21:54Z
 files/ver-IX86-0.mpq	2026-01-09T09:54:42Z
 files/ver-IX86-1.mpq	2026-01-09T09:54:42Z
 files/ver-IX86-2.mpq	2026-01-09T09:54:42Z
 files/ver-IX86-3.mpq	2026-01-09T09:54:42Z
 files/ver-IX86-4.mpq	2026-01-09T09:54:42Z
+files/ver-IX86-5.mpq	2026-01-09T09:54:42Z
 files/ver-IX86-6.mpq	2026-01-09T09:54:42Z
 files/ver-IX86-7.mpq	2026-01-09T09:54:42Z
 files/ver-OSXI-0.mpq	2026-01-09T09:54:42Z
