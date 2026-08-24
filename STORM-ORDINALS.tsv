@@ -1,0 +1,347 @@
+ordinal	entry_rva_stormd	entry_rva_storm	source_file	evidence	confidence	proposed_name	notes
+101	0x2879	0x1e1d0	SNET.CPP	56-byte wrapper that tail-calls ord 138 SNetCreateLadderGame	medium	SNetCreateGame	Non-ladder entry point in front of the ladder variant
+102	0x200e	0x1e9e0	SNET.CPP	SLOG trace string "SNetDestroy()"	high	SNetDestroy	
+103	0x146f	0x1f2e0	SNET.CPP	trace "SNetEnumDevices(0x%08x)"; asserts callback; logs spiLockDeviceList/spiUnlockDeviceList	high	SNetEnumDevices	
+104	0x11b3	0x1f420	SNET.CPP	trace "SNetEnumGames(0x%08x,0x%08x,0x%08x,*hintnextcall)"	high	SNetEnumGames	
+105	0x128f	0x1f790	SNET.CPP	trace "SNetEnumProviders(mincaps,0x%08x)"; assert (!mincaps) || (mincaps->size == sizeof(SNETCAPS))	high	SNetEnumProviders	
+106	0x233d	0x1ed00	SNET.CPP	trace "SNetDropPlayer(%u,0x%08x)"	high	SNetDropPlayer	
+107	0x146a	0x1fdd0	SNET.CPP	trace "SNetGetGameInfo(%u,0x%08x,%u,*byteswritten)"	high	SNetGetGameInfo	
+108	0x20a9	0x1ff30	SNET.CPP	trace "SNetGetNetworkLatency(%u,*result)"; asserts measurementtype >= 1 && <= 4	high	SNetGetNetworkLatency	
+109	0x274d	0x20020	SNET.CPP	trace "SNetGetNumPlayers(*firstplayerid,*lastplayerid,*activeplayers)"	high	SNetGetNumPlayers	
+110	0x2a36	0x20150	SNET.CPP	trace "SNetGetOwnerTurnsWaiting(*turns)"	high	SNetGetOwnerTurnsWaiting	
+111	0x23fb	0x20840	SNET.CPP	trace "SNetGetPerformanceData(%u,*countervalue,*countertype,...)"; assert counterid < 16	high	SNetGetPerformanceData	
+112	0x2261	0x20930	SNET.CPP	trace "SNetGetPlayerCaps(%u,*caps)"; assert caps->size == sizeof(SNETCAPS)	high	SNetGetPlayerCaps	
+113	0x222a	0x20a50	SNET.CPP	trace "SNetGetPlayerName(%u,0x%08x,%u)"	high	SNetGetPlayerName	
+114	0x130c	0x20b40	SNET.CPP	trace "SNetGetProviderCaps(*caps)"	high	SNetGetProviderCaps	
+115	0x2036	0x20be0	SNET.CPP	trace "SNetGetTurnsInTransit(*turns)"	high	SNetGetTurnsInTransit	
+116	0x283d	0x20cb0	SNET.CPP	trace "SNetInitializeDevice(0x%08x,0x%08x,0x%08x,0x%08x,0x%08x)"	high	SNetInitializeDevice	
+117	0x114a	0x20fd0	SNET.CPP	trace "SNetInitializeProvider(...)"; also logs "(using Storm build Apr 14 2001 10:46:42)"	high	SNetInitializeProvider	Build stamp dates this Storm to 2001-04-14
+118	0x277a	0x231b0	SNET.CPP	trace "SNetJoinGame(0x%08x,\"%s\",\"%s\",\"%s\",\"%s\",*playerid)"	high	SNetJoinGame	
+119	0x2770	0x23850	SNET.CPP	trace "SNetLeaveGame(0x%08x)"; logs spiStopAdvertisingGame()	high	SNetLeaveGame	
+120	0x27d4	0x23a50	SNET.CPP	trace "SNetPerformUpgrade(*upgradestatus)"; strings Patches/Patch/Prepatch.lst	high	SNetPerformUpgrade	
+121	0x1460	0x24210	SNET.CPP	trace "SNetReceiveMessage(*senderplayerid,*data,*databytes)"	high	SNetReceiveMessage	
+122	0x1b3b	0x244c0	SNET.CPP	trace "SNetReceiveTurns(%u,%u,*arraydata,*arraydatabytes,*arrayplayerstatus)"	high	SNetReceiveTurns	
+123	0x295a	0x24b90	SNET.CPP	trace "SNetRegisterEventHandler(%u,0x%08x)"	high	SNetRegisterEventHandler	
+124	0x15e1	0x24bf0	SNET.CPP	trace "SNetResetLatencyMeasurements()"	high	SNetResetLatencyMeasurements	
+125	0x1244	0x24d60	SNET.CPP	trace "SNetSelectGame(0x%08x,...,*playerid)"	high	SNetSelectGame	
+126	0x1933	0x24e30	SNET.CPP	trace "SNetSelectProvider(...)"; resource id SELECTPROVIDER_DIALOG	high	SNetSelectProvider	
+127	0x10c8	0x25790	SNET.CPP	trace "SNetSendMessage(%u,0x%08x,%u)"	high	SNetSendMessage	
+128	0x1195	0x25a30	SNET.CPP	trace "SNetSendTurn(0x%08x,%u)"	high	SNetSendTurn	
+129	0x1203	0x25b70	SNET.CPP	trace "SNetSetBasePlayer(%u)"	high	SNetSetBasePlayer	
+130	0x2829	0x25ba0	SNET.CPP	trace "SNetSetGameMode(0x%08x)"	high	SNetSetGameMode	
+131	0x1c94	0x25c90	SNET.CPP	trace "SNetUnregisterEventHandler(%u,0x%08x)"	high	SNetUnregisterEventHandler	
+133	0x1b4f	0x1f630	SNET.CPP	trace "SNetEnumGamesEx(0x%08x,0x%08x,0x%08x,*hintnextcall)"	high	SNetEnumGamesEx	
+134	0x2423	0x25910	SNET.CPP	trace "SNetSetServerChatCommand(0x%08x)"; format "\\\\.\\game\\%s"	high	SNetSetServerChatCommand	
+135	0x1da7	0x25610	SNET.CPP	trace "SNetSendDatagram(%u,0x%08x,%u)"	high	SNetSendDatagram	
+136	0x18e3	0x23f90	SNET.CPP	trace "SNetReceiveDatagram(*senderplayerid,*data,*databytes)"	high	SNetReceiveDatagram	
+137	0x29a5	0x1ec50	SNET.CPP	trace "SNetDisconnectAll(0x%08x)"	high	SNetDisconnectAll	
+138	0x29ff	0x1e210	SNET.CPP	trace "SNetCreateLadderGame(\"%s\",\"%s\",\"%s\",0x%08x,%u,0x%08x,0x%08x,%u,%u,\"%s\",\"%s\",*playerid)"	high	SNetCreateLadderGame	
+139	0x2545	0x24c40	SNET.CPP	trace "SNetReportGameResult(%u,%u,%x)"	high	SNetReportGameResult	
+140	0x1c17	0x1e120	SNET.CPP	trace "SNetCheckDataFile(\"%s\",0x%08x,%u,*extendedresult)"	high	SNetCheckDataFile	
+201	0x14c4	0xd770	SDLG.CPP	assert "window"	low		
+202	0x1c03	0xe300	SDLG.CPP	inherited: calls SDLG asserts on "window"; IsWindow/IsIconic/GetClientRect	low		
+203	0x1820	0xe370	SDLG.CPP	address inside SDLG.CPP object; PostMessageA + SMemFree	low		
+204	0x27a7	0xe410	SDLG.CPP	registers class SDlgDialog/SDlgStatic; CreateWindowExA, CreateFontA "Arial"	low		Dialog creation from a template
+205	0x10e6	0xffb0	SDLG.CPP	FindResourceA/LoadResource + same dialog-class creation path as ord 204	low		Dialog creation from a resource id
+206	0x11d6	0x10020	SDLG.CPP	window-class string "SDlgStatic"	low		
+208	0x13b1	0x101a0	SDLG.CPP	window property names SDlg_Modal / SDlg_EndDialog / SDlg_EndResult	low		
+209	0x1cd0	0x10290	SDLG.CPP	SetPropA SDlg_Modal + message loop; DestroyWindow/RemovePropA	low		Modal dialog run loop
+210	0x1c30	0x102d0	SDLG.CPP	asserts "window", "usage"	low		
+211	0x1447	0x104d0	SDLG.CPP	properties SDlg_EndDialog / SDlg_EndResult	low		End-dialog / return-result
+212	0x2536	0x10510	SDLG.CPP	EndPaint/ShowCursor	low		
+213	0x13e3	0x10560	SDLG.CPP	SMemFree; release build RTTI at this export is .?AUTIMERREC@@	low		Timer record teardown
+214	0x2748	0x105f0	SDLG.CPP	assert file only	low		
+215	0x1276	0x10970	SDLG.CPP	inherited asserts: window || (controltype && *controltype), usage, !(usage & ~0x0000FFFF)	low		
+216	0x209a	0x109e0	SDLG.CPP	asserts parentwindow, controllist, bitmapbits, bitmapsize, bitmapsize->cx > 0, bitmapsize->cy > 0	medium		Creates a dialog whose background is a bitmap and whose controls come from a control list
+217	0x11a4	0x10b90	SDLG.CPP	class-name table Button / SDlgStatic / ListBox / Scrollbar / ComboBox	medium		Maps a control type to a Win32 window class
+218	0x1942	0x10ca0	SDLG.CPP	GetCursorPos/ScreenToClient/GetTopWindow/InvalidateRect	low		
+219	0x18a7	0x10e50	SDLG.CPP	SMemAlloc + h\stpl.h list template; release RTTI .?AUTIMERREC@@	low		Allocates a timer record
+220	0x208b	0x10f00	SDLG.CPP	same cursor/window walk as ord 218	low		
+221	0x184d	0xd9a0	SDLG.CPP	assert "window"	low		
+222	0x1249	0x10680	SDLG.CPP	asserts window || (controltype && *controltype), usage, !(usage & ~0x0000FFFF)	medium		Creates or looks up a control by type+usage; release RTTI .?AUBITMAPREC@@
+223	0x13de	0x10c80	SDLG.CPP	setlocale	low		
+251	0x1a41	0x143f0	SFILE.CPP	trace "SFileAuthenticateArchive(0x%x,*extendedresult)"; advapi32.dll CryptAcquireContextA/CryptCreateHash/CryptHashData; assert (signature)	high	SFileAuthenticateArchive	
+252	0x16cc	0x151c0	SFILE.CPP	trace "SFileCloseArchive(0x%x)"	high	SFileCloseArchive	
+253	0x1d93	0x15310	SFILE.CPP	trace "SFileCloseFile(0x%x)"	high	SFileCloseFile	
+254	0x1663	0x15570	SFILE.CPP	trace "SFileDdaBegin(0x%x,%u,0x%x)"	high	SFileDdaBegin	
+255	0x26ad	0x155a0	SFILE.CPP	trace "SFileDdaBeginEx(0x%x,%u,0x%x,%u,%d,%d,0x%x)"	high	SFileDdaBeginEx	
+256	0x111d	0x170e0	SFILE.CPP	trace "SFileDdaDestroy()"	high	SFileDdaDestroy	
+257	0x28ec	0x17220	SFILE.CPP	trace "SFileDdaEnd(0x%x)"	high	SFileDdaEnd	
+258	0x2a63	0x17360	SFILE.CPP	trace "SFileDdaGetPos(0x%x,*position,*maxposition)"	high	SFileDdaGetPos	
+259	0x1f14	0x17410	SFILE.CPP	trace "SFileDdaGetVolume(0x%x,*volume,*pan)"	high	SFileDdaGetVolume	
+260	0x287e	0x17500	SFILE.CPP	trace "SFileDdaInitialize(0x%x)"; assert directsound	high	SFileDdaInitialize	
+261	0x1b81	0x17530	SFILE.CPP	trace "SFileDdaSetVolume(0x%x,%d,%d)"	high	SFileDdaSetVolume	
+262	0x2207	0x175f0	SFILE.CPP	trace "SFileDestroy()"; leak report "reporting resource leak 0x%x" over AUDIOSTREAM/HSFILE/HSARCHIVE	high	SFileDestroy	
+263	0x240a	0x17870	SFILE.CPP	trace "SFileEnableDirectAccess(%u)"	high	SFileEnableDirectAccess	
+264	0x1ffa	0x17a50	SFILE.CPP	trace "SFileGetFileArchive(0x%x,*archive)"	high	SFileGetFileArchive	
+265	0x1050	0x17b30	SFILE.CPP	trace "SFileGetFileSize(0x%x,*filesizehigh)"	high	SFileGetFileSize	
+266	0x1faf	0x17d50	SFILE.CPP	trace "SFileOpenArchive(\"%s\",%d,%x,*handle)"; allocs tagged "(hash table)"/"(block table)"; release RTTI .?AUARCHIVEREC@@	high	SFileOpenArchive	
+267	0x1df2	0x185b0	SFILE.CPP	28-byte wrapper immediately before ord 268; inherits the SFileOpenFileEx trace	medium	SFileOpenFile	Fixed-flags front end for SFileOpenFileEx
+268	0x1dac	0x185d0	SFILE.CPP	trace "SFileOpenFileEx(0x%x,\"%s\",0x%x,*handle)"; release RTTI .?AUFILEREC@@	high	SFileOpenFileEx	
+269	0x2149	0x18fa0	SFILE.CPP	wrapper whose callee traces "SFileReadFileEx2(...)"	medium	SFileReadFile	
+270	0x23dd	0x19500	SFILE.CPP	trace "SFileSetBasePath(\"%s\")"	high	SFileSetBasePath	
+271	0x1483	0x195f0	SFILE.CPP	trace "SFileSetFilePointer(0x%x,%d,0x%x,%u)"	high	SFileSetFilePointer	
+272	0x26a3	0x19760	SFILE.CPP	trace "SFileSetLocale(0x%x)"	high	SFileSetLocale	
+273	0x1a73	0x179a0	SFILE.CPP	trace "SFileGetBasePath(0x%x,%u)"	high	SFileGetBasePath	
+274	0x1b9a	0x19740	SFILE.CPP	trace "SFileSetIoErrorMode(%u,0x%x)"	high	SFileSetIoErrorMode	
+275	0x1302	0x17930	SFILE.CPP	trace "SFileGetArchiveName(0x%x,0x%x,%u)"	high	SFileGetArchiveName	
+276	0x155a	0x17ac0	SFILE.CPP	trace "SFileGetFileName(0x%x,0x%x,%u)"	high	SFileGetFileName	
+277	0x12cb	0x178a0	SFILE.CPP	trace "SFileGetArchiveInfo(0x%x,*priority,*cdrom)"	high	SFileGetArchiveInfo	
+278	0x1e83	0x19770	SFILE.CPP	trace "SFileSetPlatform(0x%x)"	high	SFileSetPlatform	
+279	0x2338	0x17bc0	SFILE.CPP	inherits asserts filename+buffer; FindFirstFileA + SMemAlloc	low		Sits beside ord 290 in the same file-name/exists group
+280	0x24e1	0x19780	SFILE.CPP	assert "buffer"	low		
+281	0x2626	0x17c20	SFILE.CPP	inherits asserts filename+buffer; FindFirstFileA + SMemAlloc	low		
+282	0x24d7	0x18d90	SFILE.CPP	trace "SFilePrioritizeRequest(0x%x,%d)"	high	SFilePrioritizeRequest	
+283	0x164a	0x14bb0	SFILE.CPP	trace "SFileCancelRequest(0x%x)"	high	SFileCancelRequest	
+284	0x137a	0x194f0	SFILE.CPP	address range only; no strings, no imports	low		
+285	0x2833	0x195c0	SFILE.CPP	assert "!(bytes & (bytes-1))" (power-of-two byte count)	medium		Sets a power-of-two I/O granularity
+286	0x16f4	0x17890	SFILE.CPP	trace "SFileEnableSeekOptimization(%u)"	high	SFileEnableSeekOptimization	
+287	0x2a27	0x18fd0	SFILE.CPP	wrapper whose callee traces "SFileReadFileEx2(...)"	medium	SFileReadFileEx	
+288	0x2932	0x15190	SFILE.CPP	trace "SFileCancelRequestEx(0x%x)"	high	SFileCancelRequestEx	
+289	0x1f0f	0x19000	SFILE.CPP	trace "SFileReadFileEx2(0x%x,0x%x,%u,*bytesread,0x%x,%d,0x%x)"	high	SFileReadFileEx2	
+290	0x1645	0x17c50	SFILE.CPP	asserts "filename", "buffer"	low		
+301	0x26e4	0x2b9d0	STORM.CPP	drives every subsystem teardown and the leak report over HSCODESTREAM/HSTRANS/HSGDIFONT/HSGDIOBJ/HSVIDEO	medium	StormDestroy	Global shutdown; frees per-subsystem handle pools
+302	0x113b	0x2ba20	STORM.CPP	returns a single global dword	low		
+303	0x1bbd	0x2ba30	STORM.CPP	asserts "optval","optlen"; switch over option ids 1-5 copying 4-byte globals out	medium	StormGetOption	Option ids 1..5, all DWORD
+304	0x127b	0x2bb10	STORM.CPP	assert "optval"; same 1-5 switch writing the globals; option 2 rejects non-power-of-two	medium	StormSetOption	
+312	0x180c	0x5950	SBLT.CPP	asserts "buffer","buffersize"; format token "SCDDDDDD"	low		
+313	0x1c26	0x5b60	SBLT.CPP	assert "destcx >= width"	low		
+314	0x214e	0x5e70	SBLT.CPP	assert "destpitch > 0"	low		
+315	0x1d11	0x6020	SBLT.CPP	asserts "destrect","destpitch > 0"	low		
+321	0x251d	0x6320	SBMP.CPP	asserts imagedata, imagebytes, buffersize || !bitmapbits	medium		Decodes a bitmap already in memory
+323	0x264e	0x6e50	SBMP.CPP	asserts filename, *filename, buffersize || !bitmapbits; opens the file	medium	SBmpLoadImage	
+324	0x29a0	0x7540	SBMP.CPP	wrapper of ord 326 (same save asserts)	medium		
+325	0x1b90	0x6160	SBMP.CPP	asserts filename, *filename, returnedbuffer	low		
+326	0x1e06	0x7570	SBMP.CPP	asserts filename, *filename, bitdepth !=8 || paletteentries, bitmapbits, width > 0, height > 0; CreateFileA	medium	SBmpSaveImage	
+331	0x1e6a	0xabb0	SCODE.CPP	asserts loopstring, *loopstring, maxiterations >= 1, handle; release RTTI .?AUSTREAM@@ and .?AUINST@@	medium		Creates an SCode stream from a loop/program string
+332	0x25db	0xb230	SCODE.CPP	assert "handle"; release RTTI .?AUSTREAM@@	medium		Destroys an SCode stream
+334	0x1d75	0xb320	SCODE.CPP	address range only	low		
+335	0x1cc6	0xb690	SCODE.CPP	asserts scodestring, *scodestring, buffer, buffersize; release RTTI .?AUINST@@	medium		Compiles/expands an SCode string into a buffer
+341	0x177b	0x10f50	SDRAW.CPP	asserts instance, classname, *classname, title, servicelevel > 0, servicelevel <= 3; LoadLibrary "ddraw.dll" + "DirectDrawCreate"; release string "DirectDraw services are not available.  You must install Mic..."	medium		Creates the app window and brings up DirectDraw at a service level 1-3
+342	0x18d9	0x11760	SDRAW.CPP	strings "PC Paintbrush (*.pcx)", "Save Screen Capture"	medium		Screen capture to PCX with a save dialog
+343	0x10b4	0x11950	SDRAW.CPP	asserts surfacenumber >= 0, surfacenumber < 4	low		
+344	0x1a0f	0x11a10	SDRAW.CPP	teardown: frees HSGDIFONT/HSGDIOBJ/HSVIDEO pools, DestroyCursor/DeleteObject/FreeLibrary	medium		SDraw shutdown
+345	0x2180	0x11b10	SDRAW.CPP	InvalidateRect only	low		
+346	0x26ee	0x11b90	SDRAW.CPP	address range only	low		
+347	0x1208	0x11bb0	SDRAW.CPP	address range only	low		
+348	0x2865	0x11c30	SDRAW.CPP	GetDeviceCaps/GetSystemMetrics/GetDesktopWindow	low		Queries display capabilities
+349	0x2086	0x11d00	SDRAW.CPP	assert "servicelevel"	low		
+350	0x1a91	0x11d60	SDRAW.CPP	asserts surfacenumber >= 0, surfacenumber < 4	low		
+351	0x1889	0x11f10	SDRAW.CPP	CreatePalette/SelectPalette + SMemAlloc/SMemFree	low		
+352	0x212b	0x11fa0	SDRAW.CPP	string "SYSTEMPALETTE"	low		
+353	0x1488	0x120c0	SDRAW.CPP	PostMessageA	low		
+354	0x21cb	0x120e0	SDRAW.CPP	SetPaletteEntries/RealizePalette/SelectPalette	medium		Realizes the palette into the DC
+355	0x1154	0x121e0	SDRAW.CPP	InvalidateRect	low		
+356	0x204a	0x12280	SDRAW.CPP	asserts surfacenumber >= 0, surfacenumber < 4	low		
+357	0x29e1	0x12380	SDRAW.CPP	asserts firstentry+numentries <= 256, entries	medium		Writes a palette entry range
+358	0x24a5	0x12440	SDRAW.CPP	pulls in SBLT.CPP "destcx >= width" and the surfacenumber asserts	low		Blits into a numbered surface
+359	0x1bfe	0x12600	SDRAW.CPP	address range only	low		
+372	0x1d48	0x13590	SEVT.CPP	SMemFree; release RTTI .?AUBREAKCMD@@	low		
+373	0x221b	0x13990	SEVT.CPP	asserts "handler","!flags"	medium		Registers an event handler
+374	0x1866	0x13cb0	SEVT.CPP	delete + SMemFree under a critical section	low		
+375	0x1186	0x13d90	SEVT.CPP	SEVT asserts + delete/SMemFree	low		
+376	0x2838	0x137c0	SEVT.CPP	SEVT asserts + delete/SMemFree	low		
+377	0x172b	0x13850	SEVT.CPP	assert file only	low		
+378	0x18e8	0x133b0	SEVT.CPP	SMemAlloc + h\stpl.h list template; release RTTI .?AUBREAKCMD@@	low		Allocates and links a handler/command record
+381	0x1c71	0x19940	SGDI.CPP	asserts videobuffer, sourcedata, s_pitch	low		
+382	0x1285	0x19b20	SGDI.CPP	asserts width, height, filecharwidth, filecharheight, charsizetable, handle	medium		Builds a bitmap font from an in-memory glyph sheet
+383	0x1b7c	0x19d00	SGDI.CPP	assert file only; release RTTI .?AUSGDIOBJ@@	low		
+385	0x1294	0x19ed0	SGDI.CPP	asserts videobuffer, string	medium		Draws text into a video buffer
+386	0x1802	0x1a510	SGDI.CPP	asserts windowsfont, handle; sample string "W_y,|'"	medium		Builds an SGdi font from a Windows HFONT
+387	0x2847	0x1a9d0	SGDI.CPP	asserts filename, *filename, filecharwidth, filecharheight, basecharwidth || charsizetable, handle	medium		Loads a bitmap font from a file
+388	0x243c	0x1ab30	SGDI.CPP	assert videobuffer	low		
+389	0x1bd6	0x1ac80	SGDI.CPP	address range only	low		
+390	0x1c4e	0x1acc0	SGDI.CPP	assert "pitch > 0"	low		
+391	0x1fcd	0x1adf0	SGDI.CPP	inherits videobuffer/string asserts and SBLT.CPP	low		
+392	0x15ff	0x1ad20	SGDI.CPP	assert file only	low		
+393	0x12bc	0x1a470	SGDI.CPP	assert "string"	low		
+401	0x2559	0x1b6b0	SMEM.CPP	SLOG trace string "SMemAlloc()" (present in BOTH builds at this ordinal)	high	SMemAlloc	
+403	0x26f3	0x1c8c0	SMEM.CPP	SLOG trace string "SMemFree()" (both builds)	high	SMemFree	
+404	0x1c8a	0x1cad0	SMEM.CPP	SLOG trace string "SMemGetSize()" (both builds)	high	SMemGetSize	
+405	0x2301	0x1d430	SMEM.CPP	SLOG trace string "SMemReAlloc()" (both builds)	high	SMemReAlloc	
+412	0x2568	0x1d820	SMSG.CPP	InterlockedIncrement/Decrement inside a critical section	low		
+413	0x1375	0x1d930	SMSG.CPP	GetMessageA/PeekMessageA/TranslateMessage/DispatchMessageA	medium		Windows message pump; also reachable from the global teardown path
+414	0x17d0	0x1dae0	SMSG.CPP	callee asserts "handler" from SMSG.CPP and "!flags" from SEVT.CPP	medium		Message-handler registration family
+415	0x1a5a	0x1dbd0	SMSG.CPP	callee asserts "handler" (SMSG.CPP) + "!flags" (SEVT.CPP)	medium		Message-handler registration family
+416	0x20ef	0x1dbf0	SMSG.CPP	callee asserts "handler" (SMSG.CPP) + "!flags" (SEVT.CPP)	medium		Message-handler registration family
+417	0x16bd	0x1dc10	SMSG.CPP	callee asserts "handler" (SMSG.CPP) + "!flags" (SEVT.CPP)	medium		Message-handler registration family
+418	0x1037	0x1da60	SEVT.CPP	SEVT.CPP asserts under a critical section	low		
+419	0x1f19	0x1daa0	SEVT.CPP	SEVT.CPP asserts + SMemAlloc under a critical section	low		
+421	0x1109	0x261a0	SREG.CPP	SREG.CPP:0x11f asserts keyname,*keyname,valuename,*valuename; returns raw bytes plus an out type	medium	SRegLoadData	
+422	0x107d	0x26360	SREG.CPP	asserts keyname,*keyname,valuename,*valuename,buffer,bufferchars	high	SRegLoadString	
+423	0x183e	0x26420	SREG.CPP	SREG.CPP:0x164 asserts ...,value; reads REG_SZ via strtoul or REG_DWORD into a DWORD out	high	SRegLoadValue	
+424	0x22b6	0x26500	SREG.CPP	SREG.CPP:0x18e asserts keyname/valuename; writes a byte blob of caller-supplied length	medium	SRegSaveData	
+425	0x22de	0x26670	SREG.CPP	asserts keyname,*keyname,valuename,*valuename,string	high	SRegSaveString	
+426	0x26d5	0x266e0	SREG.CPP	SREG.CPP:0x1b9 asserts keyname/valuename; writes a fixed 4-byte value	high	SRegSaveValue	
+427	0x22cf	0x26140	SREG.CPP	asserts buffer,buffersize; composes "Software\Battle.net\" or "Software\Blizzard Entertainment\"	medium	SRegGetBaseKey	Flag bit 0x80 picks Battle.net vs Blizzard Entertainment root
+428	0x150a	0x25fc0	SREG.CPP	SREG.CPP:0xfb asserts keyname/valuename; deletion path	medium	SRegDeleteValue	
+431	0x1307	0x2bd10	STRANS.CPP	asserts destpitch > 0, transparency, transptr->instructionoffset	medium		Blits a compiled transparency/RLE stream
+432	0x2577	0x2bde0	STRANS.CPP	asserts source, destpitch > 0	low		
+433	0x1e79	0x2c360	STRANS.CPP	callee asserts width, height, handle	low		
+434	0x21e4	0x2c490	STRANS.CPP	assert file only; release RTTI .?AUTRANS@@	low		
+436	0x1eab	0x2c5b0	STRANS.CPP	asserts source, handle	low		
+437	0x1faa	0x2c700	STRANS.CPP	asserts sourcemask, dirtyarray, dirtyarraymask, handle	medium		Builds a transparency from a mask plus a dirty-rect array
+438	0x1a96	0x2c620	STRANS.CPP	asserts sourcemask, handle	low		
+439	0x2482	0x2d1a0	STRANS.CPP	callee asserts filename, *filename, handle	low		
+440	0x1735	0x2d1f0	STRANS.CPP	assert file only	low		
+441	0x20d6	0x2d300	STRANS.CPP	asserts dirtyarray, dirtyvalue, transparency	low		
+442	0x1e74	0x2d000	STRANS.CPP	assert file only	low		
+443	0x2572	0x2ca80	STRANS.CPP	asserts basemask, secondmask, handle	low		
+444	0x1ab4	0x2c430	STRANS.CPP	address range only	low		
+445	0x246e	0x2beb0	STRANS.CPP	asserts width, height, handle	medium		Creates a transparency of a given size
+446	0x1a4b	0x2c3c0	STRANS.CPP	asserts width, height, handle	medium		Creates a transparency of a given size
+447	0x2108	0x2d0b0	STRANS.CPP	asserts filename, *filename, handle	medium		Loads a transparency from a file
+451	0x1352	0x2d4b0	SVID.CPP	handle-pool tag "HSVIDEO"	low		
+452	0x1d16	0x2d570	SVID.CPP	assert "video"	low		
+453	0x16d6	0x2d640	SVID.CPP	release build loads smackw32.dll and resolves _SmackBufferOpen@24/_SmackBufferClose@4/_SmackBufferNewPalette@12; debug carries the blit-mode table "1 W1=W2 W2=S W1=TW 2 D=W"	medium	SVidInitialize	Smacker video backend bring-up
+454	0x269e	0x2d930	SVID.CPP	asserts filename, handle, destbuffer || !(flags & 0x20000000), destsize || !destbuffer, (!paletteuse) || (paletteuse->size == sizeof(SVIDPALETTEUSE)); window title "Video Player"; release RTTI .?AUVIDEOREC@@	medium		Plays a video from a file
+455	0x159b	0x2e2a0	SVID.CPP	same asserts as ord 454 but on sourceptr/sourcebytes	medium		Plays a video already in memory
+456	0x202c	0x2e430	SVID.CPP	inherits SVID "video" assert and the SDRAW palette assert	low		
+457	0x16d1	0x2e470	SVID.CPP	assert "video"	low		
+458	0x2676	0x2eff0	SVID.CPP	assert "video"; release RTTI .?AUVIDEOREC@@	low		
+459	0x1da2	0x2f110	SVID.CPP	assert "video"	low		
+461	0x1389	0x128b0	SERR.CPP	THE assert/error reporter: every assert in the DLL calls it as (0x85100000, __FILE__, __LINE__, expr, 0, 1); reads registry "Break On Errors"/"Internal", formats " : error %u: ", MessageBoxA, then TerminateProcess	high	SErrDisplayError	Single most load-bearing identification: it anchors every __FILE__/__LINE__/expr triple
+462	0x1118	0x12e70	SERR.CPP	asserts buffer, bufferchars; walks the registered message-table list then FormatMessageA	high	SErrGetErrorStr	
+463	0x1ae1	0x12f90	SERR.CPP	returns the last-error global that ord 465 writes	high	SErrGetLastError	
+464	0x11ae	0x130a0	SERR.CPP	HeapAlloc's a 12-byte {id, hModule, next} node onto the list ord 462 searches	medium		Registers a FormatMessage message-table module for an error-code range
+465	0x1091	0x131e0	SERR.CPP	stores the code in a global then calls SetLastError	high	SErrSetLastError	
+466	0x1f9b	0x130f0	SERR.CPP	formats "%s (%s)" then either calls ord 461 with 0x8510007f or prints "Storm Error : handle never released -- %s"	medium		Resource-leak reporter used by every subsystem's Destroy
+467	0x1965	0x130e0	SERR.CPP	thin wrapper calling ord 466 with a NULL second name	low		
+468	0x2257	0x13200	SERR.CPP	sets the global that makes ord 461 return immediately	medium	SErrSuppressErrors	
+469	0x277f	0x12fe0	SERR.CPP	appends a callback record to the error-handler list ord 461 walks; release RTTI .?AUHANDLER@@	medium	SErrRegisterHandler	
+470	0x1fe6	0x13210	SERR.CPP	removes that callback from the list; release RTTI .?AUHANDLER@@	medium	SErrUnregisterHandler	
+472	0x1596	0x8690	SCMD.CPP	address range only	low		
+473	0x2441	0x86b0	SCMD.CPP	SMemFree	low		
+474	0x17ad	0x8710	SCMD.CPP	asserts buffer, bufferchars	low		
+475	0x1e51	0x87b0	SCMD.CPP	assert "cmdline"	medium		Parses a supplied command line
+476	0x1433	0x9180	SCMD.CPP	assert "listptr"	low		
+477	0x1938	0x91e0	SCMD.CPP	asserts namelength < 16, (!variablebytes) || variableptr, and three flag-field asserts of the form (((flags) & ((0 << 24) | (1 << 24) | (2 << 24))) != (2 << 24)) || (!s_addedoptional); release RTTI .?AUCMDDEF@@	medium		Registers one command-line argument definition (CMDDEF)
+478	0x18b1	0x8540	SCMD.CPP	SMemFree	low		
+479	0x2072	0x9160	SCMD.CPP	GetCommandLineA + message "The syntax of the command is incorrect."	medium		Parses the process command line against the registered CMDDEFs
+481	0x1bd1	0x1c430	SMEM.CPP	trace "SMemFindNextBlock()"; assert details->size == sizeof(SMEMBLOCKDETAILS)	high	SMemFindNextBlock	
+482	0x2374	0x1c6f0	SMEM.CPP	trace "SMemFindNextHeap()"; assert details->size == sizeof(SMEMHEAPDETAILS)	high	SMemFindNextHeap	
+483	0x1564	0x1c9c0	SMEM.CPP	trace "SMemGetHeapByCaller()"	high	SMemGetHeapByCaller	
+484	0x15fa	0x1ca60	SMEM.CPP	trace "SMemGetHeapByPtr()"	high	SMemGetHeapByPtr	
+485	0x2176	0x1cb50	SMEM.CPP	trace "SMemHeapAlloc()"	high	SMemHeapAlloc	
+486	0x1064	0x1cc30	SMEM.CPP	trace "SMemHeapCreate()"	high	SMemHeapCreate	
+487	0x15cd	0x1cd70	SMEM.CPP	trace "SMemHeapDestroy()"	high	SMemHeapDestroy	
+488	0x189d	0x1cdf0	SMEM.CPP	trace "SMemHeapFree()"	high	SMemHeapFree	
+489	0x23ec	0x1ceb0	SMEM.CPP	trace "SMemHeapReAlloc()"	high	SMemHeapReAlloc	
+490	0x209f	0x1d330	SMEM.CPP	trace "SMemHeapSize()"	high	SMemHeapSize	
+491	0x286a	0x1d570	SMEM.CPP	body is exactly memcpy(dest, src, n)	medium	SMemCopy	
+492	0x281f	0x1d5a0	SMEM.CPP	body is exactly memset(dest, value & 0xff, n) - note the (ptr, length, value) argument order	medium	SMemFill	
+493	0x28e2	0x1d5e0	SMEM.CPP	body is exactly memmove(dest, src, n)	medium	SMemMove	
+494	0x1b09	0x1d600	SMEM.CPP	body is exactly memset(dest, 0, n)	medium	SMemZero	
+495	0x158c	0x1d550	SMEM.CPP	body is exactly memcmp(a, b, n)	medium	SMemCmp	
+496	0x13d9	0x1d500	SMEM.CPP	sets four debug-flag globals from a (value, mask) pair over bits 1/2/4/8	medium		SMem debug-flag setter
+497	0x2649	0x1c310	SMEM.CPP	trace "SMemDumpState()"; assert outputproc; format "%s:%d  blocks=%u  %uk/%uk/%uk"	high	SMemDumpState	
+501	0x2298	0x2aaa0	SSTR.CPP	SSTR.CPP:0x1d8-0x1d9 asserts dest+"source"; bounded strncpy-style copy returning the end of the copy	medium	SStrCopy	
+502	0x2293	0x2b6a0	SSTR.CPP	the canonical Storm/MPQ string hash: seed 0x7FED7FED, table at 0x6ffe0360, uppercases and maps '/' to '\\'	high	SStrHash	32-bit; low bit of arg 2 selects case-sensitive (raw) hashing
+503	0x15eb	0x2ad40	SSTR.CPP	SSTR.CPP:0x21f-0x220 asserts dest+"source"; walks to the end of dest then bounded-copies source (concat)	medium	SStrPack	
+504	0x1f32	0x2b540	SSTR.CPP	asserts string, *string, buffer || !bufferchars, whitespace; advances *string past a token, honours '"' quoting, reports whether quotes were seen	medium	SStrTokenize	
+505	0x15f0	0x2a9e0	SSTR.CPP	SSTR.CPP:0x1a0 assert "string"; dispatches to ord 571 or ord 572 on a direction flag	medium		Find-character with a forward/reverse flag
+506	0x1f78	0x2acb0	SSTR.CPP	assert "string"; word-at-a-time strlen	medium	SStrLen	
+507	0x218f	0x2abe0	SSTR.CPP	assert "string"; SStrLen + SMemAlloc(len+1) + SMemCopy	medium	SStrDup	Allocation is tagged SSTR.CPP:0x1f2
+508	0x227f	0x2aa20	SSTR.CPP	asserts string1,string2; calls strncmp	medium	SStrCmp	Takes an explicit max-chars argument
+509	0x19bf	0x2aa60	SSTR.CPP	asserts string1,string2; calls _strnicmp	medium	SStrCmpI	
+510	0x1acd	0x2b910	SSTR.CPP	body is exactly _strupr(string)	high	SStrUpper	
+511	0x2194	0x1d700	SMSG.CPP	tail-call into ord 378 (SEVT.CPP record allocator)	low		
+512	0x1a55	0x1dc50	SMSG.CPP	calls a common dispatcher with FourCC 'SMSH' (0x534d5348)	medium		FourCC-tagged message post; sibling of 513/514/515
+513	0x12ad	0x1dca0	SMSG.CPP	calls the same dispatcher with FourCC 'SMSI' (0x534d5349)	medium		
+514	0x1113	0x1dcc0	SMSG.CPP	calls the same dispatcher with FourCC 'SMSJ' (0x534d534a)	medium		
+515	0x1b68	0x1dce0	SMSG.CPP	calls the same dispatcher with FourCC 'SMSG' (0x534d5347)	medium		
+516	0x22f2	0x1d9c0	SMSG.CPP	SMSG.CPP:0xca; returns a code pointer (a window procedure) when the argument is 0	medium		Returns Storm's WndProc
+517	0x1d4d	0x1dc30	SMSG.CPP	writes the global HWND that ord 518 returns	medium	SMsgSetMainWindow	Name inferred from use, not from a string
+518	0x22d9	0x1d9b0	SMSG.CPP	returns that global HWND; SErrDisplayError (ord 461) uses it as the MessageBoxA parent after IsWindow/IsWindowVisible	medium	SMsgGetMainWindow	
+521	0x28b5	0x269c0	SRGN.CPP	assert "handle"	low		
+523	0x2699	0x27340	SRGN.CPP	assert file only	low		
+524	0x2090	0x273a0	SRGN.CPP	asserts handle, !reserved	low		
+525	0x1609	0x27490	SRGN.CPP	assert "handle"	low		
+527	0x27de	0x27640	SRGN.CPP	asserts handle, orighandle, !reserved	medium		Duplicates a region
+528	0x2446	0x282e0	SRGN.CPP	assert file only	low		
+529	0x236a	0x28400	SRGN.CPP	callee asserts handle, numrects	low		
+530	0x1f87	0x27930	SRGN.CPP	assert file only	low		
+531	0x1b31	0x28540	SRGN.CPP	callee assert "handle"	low		
+532	0x16a9	0x28630	SRGN.CPP	assert file only	low		
+533	0x2252	0x28720	SRGN.CPP	callee assert "handle"	low		
+534	0x2658	0x26a90	SRGN.CPP	asserts handle, combinemode >= 1, combinemode <= 6	medium		Region combine with a 1-6 mode (the Win32 RGN_* range)
+535	0x17c6	0x279a0	SRGN.CPP	asserts handle, numparams	low		
+536	0x236f	0x28340	SRGN.CPP	asserts handle, numrects	medium		Returns/consumes a rect array
+537	0x2045	0x27810	SRGN.CPP	assert "handle"	low		
+538	0x1b36	0x28470	SRGN.CPP	assert "handle"	low		
+539	0x16ae	0x28560	SRGN.CPP	assert "handle"	low		
+540	0x217b	0x28680	SRGN.CPP	assert "handle"	low		
+541	0x268f	0x1ae60	SLOG.CPP	VirtualAlloc/VirtualFree + WriteFile/FlushFileBuffers/CloseHandle	low		Closes/flushes a log
+542	0x23b5	0x1afe0	SLOG.CPP	asserts filename, *filename	medium		Creates a log file
+543	0x2167	0x1b5f0	SLOG.CPP	VirtualAlloc under the log critical section	low		
+544	0x16ea	0x1b120	SLOG.CPP	hex-dump formats "%04x:  " and "%02x "	medium		Hex-dump helper
+545	0x28ba	0x1b470	SLOG.CPP	WriteFile/FlushFileBuffers	low		
+546	0x13bb	0x1b4a0	SLOG.CPP	WriteFile/FlushFileBuffers	low		
+547	0x13b6	0x1b510	SLOG.CPP	vsprintf + timestamp "%u/%u %02u:%02u:%02u.%03u   "	medium		Formatted log write
+548	0x2789	0x1b620	SLOG.CPP	same timestamp path plus OutputDebugStringA	medium		Formatted log write that also mirrors to the debugger
+549	0x2513	0x1b580	SLOG.CPP	VirtualAlloc under the log critical section	low		
+550	0x10f5	0x1b5b0	SLOG.CPP	assert "logptr->indent >= 0"	medium		Log indent control
+551	0x101e	0xd200	SCOMP.CPP	asserts destsize, *destsize >= sourcesize, source	medium	SCompCompress	Output-buffer-must-be-at-least-input check is the compress side
+552	0x2630	0xd3c0	SCOMP.CPP	asserts destbuffersize >= sourcesize, source, sourcesize >= sizeof(BYTE)	medium	SCompDecompress	The sizeof(BYTE) minimum is the leading compression-type byte
+561	0x1bae	0x127e0	SERR.CPP	__cdecl varargs; vsprintf then ord 461 with code 0x85100084 and the file/line stashed by ord 564, then ExitProcess(1)	medium	SErrDisplayAppFatal	Unconditionally terminates; pairs with ord 564
+562	0x2919	0x12e10	SERR.CPP	__cdecl varargs; vsprintf then a straight pass-through to ord 461 with all six arguments	medium		Printf-style front end for SErrDisplayError
+563	0x1dfc	0x12fa0	SERR.CPP	returns the "currently displaying an error" re-entry global	medium		
+564	0x1b04	0x12fb0	SERR.CPP	stores (file, line) plus GetCurrentThreadId; ord 561 consumes and clears it	medium		Sets the per-thread file/line context that ord 561 reports; the callers import 561 and 564 as a pair
+571	0x150f	0x2a960	SSTR.CPP	SSTR.CPP:0x17d assert "string"; forward scan for a character	medium	SStrChr	
+572	0x20bd	0x2a9a0	SSTR.CPP	SSTR.CPP:0x18e assert "string"; reverse scan for a character	medium	SStrChrR	
+573	0x2158	0x2afb0	SSTR.CPP	SSTR.CPP:0x285 assert "string"; full float parse with sign, fraction table and e/E exponent, returns double	medium	SStrToDouble	
+574	0x1361	0x2b190	SSTR.CPP	SSTR.CPP:0x290 assert "string"; identical parse truncated to float	medium	SStrToFloat	
+575	0x1f2d	0x2b370	SSTR.CPP	SSTR.CPP:0x29b assert "string"; signed base-10 integer parse	medium	SStrToInt	
+576	0x1e7e	0x2b4f0	SSTR.CPP	SSTR.CPP:0x2ab assert "string"; base-10 parse with no sign handling	medium	SStrToUnsigned	
+577	0x24f0	0x2b3e0	SSTR.CPP	SSTR.CPP:0x2a3 assert "string"; signed 64-bit parse using __allmul	medium	SStrToInt64	
+578	0x1e42	0x2aef0	SSTR.CPP	SSTR.CPP:0x245-0x246 asserts buffer+"format"; __cdecl varargs over _vsnprintf with truncation fixup	medium	SStrPrintf	
+579	0x173f	0x2b920	SSTR.CPP	body is exactly _strlwr(string)	high	SStrLower	
+580	0x14ab	0x2b780	SSTR.CPP	SSTR.CPP:0x31d assert "string"; the 64-bit twin of ord 502's hash, table at 0x6ffe03a0	medium	SStrHash64	
+581	0x168b	0x2af50	SSTR.CPP	SSTR.CPP:0x26b-0x26c asserts buffer+"format"; takes a va_list instead of varargs	medium	SStrVPrintf	
+601	0x1bb3	0x1040	SBig.cpp	address range only (SBig.cpp object 0x6ff84600-0x6ff8723a)	low		
+602	0x1069	0x11c0	SBig.cpp	address range only	low		
+603	0x234c	0x1320	SBig.cpp	address range only	low		
+604	0x275c	0x1400	SBig.cpp	address range only; release build carries the ".I" tag string	low		
+605	0x2103	0x1480	SBig.cpp	assert "!borrow"	low		
+606	0x1adc	0x15f0	SBig.cpp	C++ delete; release build tags ".E"/".I"	low		
+607	0x13cf	0x1670	SBig.cpp	asserts m_used < SIZE, count <= m_used, d <= SMALL_BOUND, c <= SMALL_BOUND, !borrow	low		
+608	0x2095	0x2440	SBig.cpp	asserts count <= m_used, !borrow, m_used < SIZE	low		
+609	0x1ca8	0x3810	SBig.cpp	address range only	low		
+610	0x20e0	0x3990	SBig.cpp	assert "c <= SMALL_BOUND"	low		
+611	0x290a	0x39e0	SBig.cpp	address range only	low		
+612	0x1e6f	0x3ac0	SBig.cpp	address range only	low		
+613	0x17f8	0x3ad0	SBig.cpp	asserts m_used < SIZE, count <= m_used	low		
+614	0x22ca	0x3af0	SBig.cpp	address range only	low		
+615	0x119a	0x3b10	SBig.cpp	asserts !borrow, m_used < SIZE, count <= m_used	low		
+616	0x29c8	0x3d50	SBig.cpp	address range only	low		
+617	0x235b	0x3d60	SBig.cpp	address range only	low		
+618	0x2504	0x3df0	SBig.cpp	address range only	low		
+619	0x1e4c	0x3e00	SBig.cpp	asserts count <= m_used, d <= SMALL_BOUND, m_used < SIZE, !borrow	low		
+620	0x13ca	0x3e10	SBig.cpp	address range only	low		
+621	0x1253	0x3e20	SBig.cpp	asserts m_used < SIZE, count <= m_used, d <= SMALL_BOUND, c <= SMALL_BOUND, !borrow	low		
+622	0x104b	0x3e70	SBig.cpp	address range only	low		
+623	0x24a0	0x3e90	SBig.cpp	asserts m_used < SIZE, count <= m_used	low		
+624	0x2a45	0x3eb0	SBig.cpp	direct __FILE__ reference to SBig.cpp in BOTH builds at this ordinal	low		Anchors the whole 601-647 block to SBig.cpp
+625	0x19dd	0x3f30	SBig.cpp	address range only	low		
+626	0x11db	0x4040	SBig.cpp	address range only	low		
+627	0x192e	0x41a0	SBig.cpp	address range only	low		
+628	0x1979	0x4300	SBig.cpp	asserts m_used < SIZE, count <= m_used	low		
+629	0x1924	0x4320	SBig.cpp	asserts count <= m_used, m_used < SIZE	low		
+630	0x1456	0x4630	SBig.cpp	address range only	low		
+631	0x25e0	0x4640	SBig.cpp	address range only	low		
+632	0x1dde	0x4650	SBig.cpp	address range only	low		
+633	0x1b45	0x4660	SBig.cpp	address range only	low		
+634	0x29d2	0x4680	SBig.cpp	address range only	low		
+635	0x1b77	0x46a0	SBig.cpp	address range only	low		
+636	0x1749	0x46c0	SBig.cpp	assert "!borrow"	low		
+637	0x20f9	0x46e0	SBig.cpp	address range only; release build tags ".E"	low		
+638	0x1816	0x4950	SBig.cpp	memcpy	low		
+639	0x282e	0x49a0	SBig.cpp	address range only	low		
+640	0x263f	0x49e0	SBig.cpp	asserts m_used < SIZE, count <= m_used, d <= SMALL_BOUND; release build tags ".D"	low		
+641	0x2978	0x4c90	SBig.cpp	pulls in SSTR.CPP "source" plus the SBig asserts	low		Big-number to/from string
+642	0x1dd4	0x4cc0	SBig.cpp	asserts m_used < SIZE, count <= m_used, d <= SMALL_BOUND	low		
+643	0x19c4	0x4cf0	SBig.cpp	address range only; release build tags ".E"	low		
+644	0x20c7	0x4f00	SBig.cpp	memcpy	low		
+645	0x1744	0x4f50	SBig.cpp	address range only	low		
+646	0x17bc	0x4f80	SBig.cpp	address range only	low		
+647	0x1ea6	0x4fc0	SBig.cpp	address range only	low		
