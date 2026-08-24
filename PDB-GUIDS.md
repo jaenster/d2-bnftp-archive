@@ -10,9 +10,11 @@ are just the public identifiers Blizzard embedded in the shipped executables.
 
 ## Game versions (from the retail patch MPQs)
 
-Only the **1.11 - 1.14d retail** line shipped a debug directory. Everything earlier
-(Classic 1.01-1.06, LoD 1.08-1.10, 1.00) and all betas (1.10b, 1.10s, 1.13a) are
-debug-**stripped** - no GUID exists to record.
+The **1.11 - 1.14d retail** line carries a CodeView **RSDS** record, which is what the
+table below lists. Everything from **Classic 1.04b / LoD 1.07 through 1.10** carries an
+older VC6 **NB10** record instead - a 32-bit signature rather than a GUID, but the same
+kind of symbol-server key. Those are in [NB10 records](#nb10-records-classic-104b--lod-110)
+below and in `PDB-NB10.tsv`. Only **1.00 - 1.03** is genuinely debug-stripped.
 
 | version | channel | module | pdb | guid | age |
 |-|-|-|-|-|-|
@@ -87,8 +89,17 @@ No Ghidra/IDA needed for the patch set:
    so extract the module set **by name** (`Game.exe`, `D2Game.dll`, `D2Common.dll`,
    `D2Client.dll`, `D2VidTst.exe`, `Storm.dll`, ...). Older patches ship a near-empty
    listfile, but the files are still present as unnamed-but-decryptable-by-name blocks.
-3. In each extracted PE, find the CodeView record: `52 53 44 53` (`RSDS`) + 16-byte GUID
-   (mixed-endian) + 4-byte age + null-terminated `.pdb` path.
+3. In each extracted PE, walk the **debug data directory** (entry 6) and read every
+   `IMAGE_DEBUG_TYPE_CODEVIEW` record. Two encodings appear, and looking for only one is
+   how the pre-1.11 line got mis-recorded as stripped for so long:
+   - `52 53 44 53` (`RSDS`, VC7+) + 16-byte GUID (mixed-endian) + 4-byte age + `.pdb` path.
+   - `4E 42 31 30` (`NB10`, VC6) + 4-byte offset + 4-byte **signature** + 4-byte age +
+     `.pdb` path. The symsrv key is the signature and age in hex, e.g. signature
+     `0x3AF879CA` age `1` -> `3AF879CA1`.
+
+   Grepping the file for the literal string `RSDS` finds the first kind and silently misses
+   the second; the debug directory finds both, and finds them at their real offsets rather
+   than wherever those four bytes happen to occur.
 
 The live binaries' GUIDs were read the same way from their in-memory RSDS records; the Mac
 build carries a Mach-O `LC_UUID` load command instead.
@@ -112,3 +123,103 @@ launcher `Game.exe` differs between Classic (`GameD2.pdb`) and LoD (`Game.pdb`).
 | 1.14b | Game (Classic) | `GameD2.pdb` | `B82E0D2D-8CB0-4D96-A328-DCAA5EB5AD4D` |
 | 1.14c | Game (Classic) | `GameD2.pdb` | `345B5CC5-B5EE-4CF1-8D58-CD8EB7062C48` |
 
+
+## NB10 records (Classic 1.04b - LoD 1.10)
+
+383 records across 20 builds, one per shipped module. The full set is in
+[`PDB-NB10.tsv`](PDB-NB10.tsv); this is the index. `symsrv key` is the signature and age
+concatenated in hex, which is the directory a symbol server keys the PDB on:
+`Fog.pdb/3AF6E1D91/Fog.pdb`.
+
+The count is 19 per build almost everywhere, because that is how many modules a D2 install
+of that era had. LoD 1.09d is 18: `D2Net.dll` in that build alone has no debug directory.
+Every module changed between 1.09b and 1.09d, so it is not a matter of one file being left
+untouched - that single link dropped the record and no other did.
+
+| edition | version | modules | build tree(s) |
+|-|-|-|-|
+| Classic | 1.04b | 19 | `C:\D2\Release` |
+| Classic | 1.04c | 19 | `C:\D2\Release` |
+| Classic | 1.05 | 19 | `C:\D2\Release` |
+| Classic | 1.05b | 19 | `C:\D2\Release` |
+| Classic | 1.06 | 19 | `C:\D2\Release` |
+| Classic | 1.06b | 19 | `C:\Projects\D2106\Release`, `C:\D2\Release` |
+| Classic | 1.08 | 19 | `C:\Projects\Diablo2\Release` |
+| Classic | 1.09 | 19 | `C:\Projects\Diablo2\Release` |
+| Classic | 1.09b | 19 | `C:\Projects\D2109r-pin\Diablo2\Release`, `C:\Projects\Diablo2\Release` |
+| Classic | 1.09d | 19 | `C:\Src\Diablo2\Release`, `C:\Projects\Diablo2\Release` |
+| Classic | 1.10 | 19 | `C:\projects\D2\head\Diablo2\Release` |
+| LoD | 1.07 | 19 | `C:\Projects\Diablo2\Release`, `D:\D2\Release` |
+| LoD | 1.07_Beta | 23 | `D:\D2\Release`, `C:\Projects\Diablo2\Release`, + three debug trees |
+| LoD | 1.08 | 19 | `C:\Projects\Diablo2\Release` |
+| LoD | 1.09 | 19 | `C:\Projects\Diablo2\Release` |
+| LoD | 1.09b | 19 | `C:\Projects\D2109r-pin\Diablo2\Release`, `C:\Projects\Diablo2\Release` |
+| LoD | 1.09d | 18 | `C:\Src\Diablo2\Release`, `C:\Projects\Diablo2\Release` |
+| LoD | 1.10b_Beta_1 | 19 | `C:\Src\Diablo2\Release` |
+| LoD | 1.10f | 19 | `C:\projects\D2\head\Diablo2\Release` |
+| LoD | 1.10s_Beta_2 | 19 | `C:\Src\Diablo2\Release` |
+
+### What the build trees say
+
+The provenance chain now starts seven years earlier than the RSDS section could show it:
+
+- **`C:\D2\Release`** builds everything from 1.04b to 1.06 - one flat tree, no branch in
+  the path, which is what a small team shipping patches off trunk looks like.
+- **`C:\Projects\D2106\Release`** appears in 1.06b for a subset of modules: a
+  version-named branch cut for that patch while trunk moved on. `C:\Projects\D2109r-pin`
+  in 1.09b is the same pattern with the branch name saying so out loud - **pin**.
+- **`C:\Projects\Diablo2\Release`** takes over from 1.08 and is still the tree 1.11 ships
+  from, so the RSDS-era `C:\Projects\Diablo2` in the table above is not a new tree; it is
+  this one, six years old by then.
+- **`C:\projects\D2\head\Diablo2\Release`** is 1.10 in both editions - the only place a
+  literal `head` shows up, on both sides of the Classic/LoD split at once.
+- LoD 1.07 splits: 18 modules from `C:\Projects\Diablo2\Release` and **Storm alone** from
+  `D:\D2\Release`. Storm was a shared library built elsewhere and dropped in, which is
+  exactly how `\D2\3rdParty\STORM\SOURCE\*.CPP` in the beta's debug build describes it.
+
+### The LoD beta (2001-04) shipped its debug DLLs
+
+The 2001 Lord of Destruction beta CD (`D2XBETA.iso`) installs three modules built from
+debug trees, alongside the release set:
+
+| module | symsrv key | pdb path |
+|-|-|-|
+| `Stormd.dll` | `3AD88D071` | `C:\D2\Debug\StormD.pdb` |
+| `D2CMPd.dll` | `3ADB2A338` | `D:\D2\Obj\Debug-Expansion\D2Cmp\D2CMPd.pdb` |
+| `TelnetD.dll` | `3AC3AE5E2` | `D:\D2\Obj\Debug-Expansion\TelnetD\TelnetD.pdb` |
+
+`Obj\Debug-Expansion` names the configuration: an expansion-only debug target, distinct
+from the plain `Debug` that Storm used. Nothing in the release set imports any of the
+three; `D2CMPd` and `TelnetD` both link `StormD.dll`, and `D2CMPd` additionally links the
+**release** `Fog.dll`. So they are a debug set meant to be swapped in over their release
+namesakes, left on the disc by accident.
+
+`TelnetD` imports `WS2_32` and `MSWSOCK` and exports exactly `TelnetStart`, `TelnetStop`
+and `TelnetSendString`. It registers a window class `TELNETDCLASS`, runs a worker thread
+("Telnet worker thread startup"), stamps itself `STARTUP version(Apr 13 2001 17:04:01)`,
+and logs to `telnetd.log` under `c:\temp`. It is a real listening TCP console for the
+running game - the debug channel the developers watched a build on - and no shipped D2
+binary references it.
+
+Because they are debug builds they carry `__FILE__` assert strings, which name the source
+files the release binaries only hint at:
+
+- `\D2\source\D2CMP\SRC\` - `CelCmp` `Codec` `FastCmp` `FindTiles` `LRUCache` `PalShift`
+  `Palette` `Raw` `SubTile` `TileCache` `TileProjects` `Tilecmp` `CelDataHash` `Count`
+  `DrwCntxt` `GfxHash` `SpriteCache` `TileLib` (18 translation units)
+- `\D2\3rdParty\STORM\SOURCE\` - `SBLT` `SBMP` `SBig` `SCMD` `SCODE` `SCOMP` `SDLG`
+  `SDRAW` `SERR` `SEVT` `SFILE` `SGDI` `SLOG` `SMEM` `SMSG` `SNET` `SREG` `SRGN` `SSTR`
+  `STORM` `STRANS` `SVID` (22 translation units)
+- `\D2\source\TelnetD\` - `TelnetD.cpp`, `TND_IO.CPP`
+- one more that belongs to neither: `\d2\source\d2hell\src\archive.cpp`, referenced from
+  `D2CMPd`. **`D2Hell`** is a source directory no shipped module names.
+
+### The beta D2Game.dll is retail 1.07 minus 21 bytes
+
+`lod/1.07_Beta/D2Game.dll` and `lod/1.07/D2Game.dll` are both 999,479 bytes and carry the
+**same** symsrv key `3AF879CA1` - the same PDB, so the same compile. They differ in 21
+bytes total, scattered between `0x1919` and `0x7da88`. The beta build is a hand-patched
+1.07 rather than a separate branch.
+
+Both also carry `C:\Projects\Diablo2\Release\D2Game.pdb` while every other module in the
+beta says `D:\D2\Release` - D2Game came from the retail tree and the rest did not.
