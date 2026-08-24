@@ -1,0 +1,212 @@
+platform	edition	version	file	CompanyName	ProductName	FileDescription	InternalName	OriginalFilename	FileVersion	ProductVersion	LegalCopyright	Comments	SpecialBuild	PrivateBuild
+windows	classic	1.00	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.00	D2Server.dll	Blizzard Entertainment	Diablo II	Diablo II Server	D2SERVE	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.00	DIIUnin.exe	Blizzard Entertainment	Diablo II Uninstaller	Diablo II Uninstaller	Diablo II Unin	Diablo II Unin.exe	1, 0, 0, 5	Version 1.05	Copyright © 1998	NCompanyName	D	LProductName
+windows	classic	1.00	Diablo II.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 0, 1	1, 0, 0, 1	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.00	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 0, 1	1, 0, 0, 1	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.00	RICHED20.dll	Microsoft Corporation	Microsoft RichEdit Control, version 2.0	Rich Text Edit Control, v2.0	riched20	riched20.dll	5.0.152.0	5.0	Copyright © Microsoft Corp. 1997.	Richedit Version 2.0		
+windows	classic	1.00	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.00	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0i	1.0i	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.00	ijl11.dll	Intel Corporation	Intel® JPEG Library	Intel® JPEG Library - Retail Version	Intel® JPEG Library	ijl11.dll	1.1.2	1.1.2	Copyright © 1999	Intel® JPEG Library	D	16
+windows	classic	1.00	smackw32.dll	RAD Game Tools, Inc.	Smacker	Smacker Video Technology			3.1n	3.1n	Copyright (C) 1994-97 RAD Game Tools, Inc.	Thank you for using Smacker!		
+windows	classic	1.00_Beta	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.00_Beta	DIIBUnin.exe	Blizzard Entertainment	Diablo II Uninstaller	Diablo II Uninstaller	Diablo II Unin	Diablo II Unin.exe	1, 0, 0, 5	Version 1.05	Copyright © 1998	NCompanyName	D	LProductName
+windows	classic	1.00_Beta	DIIUnin.exe	Blizzard Entertainment	Diablo II Uninstaller	Diablo II Uninstaller	Diablo II Unin	Diablo II Unin.exe	1, 0, 0, 5	Version 1.05	Copyright © 1998	NCompanyName	D	LProductName
+windows	classic	1.00_Beta	Diablo II.exe	BLizzard North	BLizzard North Diablo 2	Diablo 2	Diablo 2	Diablo 2.exe	1, 0, 0, 1	1, 0, 0, 1	Copyright © 1999	>CompanyName	D	PProductName
+windows	classic	1.00_Beta	SmackW32.dll	RAD Game Tools, Inc.	Smacker	Smacker Video Technology			3.1n	3.1n	Copyright (C) 1994-97 RAD Game Tools, Inc.	Thank you for using Smacker!		
+windows	classic	1.00_Beta	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.00_Beta	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.00_Beta	ijl11.dll	Intel Corporation	Intel® JPEG Library	Intel® JPEG Library - Retail Version	Intel® JPEG Library	ijl11.dll	1.1.2	1.1.2	Copyright © 1999	Intel® JPEG Library	D	16
+windows	classic	1.00_Beta	SETUP.EXE	Blizzard Entertainment	Diablo II Installer	Diablo II Installer	Install	Install.exe	1, 0, 0, 5	Version 1.00	Copyright © 1999	NCompanyName	D	HProductName
+windows	classic	1.00_Beta	riched20.dll	Microsoft Corporation	Microsoft RichEdit Control, version 2.0	Rich Text Edit Control, v2.0	riched20	riched20.dll	5.0.152.0	5.0	Copyright © Microsoft Corp. 1997.	Richedit Version 2.0		
+windows	classic	1.01	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 22, 0, 0	2, 22, 0, 0	Copyright © 2000	NCompanyName	D	PProductName
+windows	classic	1.01	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.01	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 0, 1	1, 0, 0, 1	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.01	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.02	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 22, 0, 0	2, 22, 0, 0	Copyright © 2000	NCompanyName	D	PProductName
+windows	classic	1.02	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.02	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 2, 0	1, 0, 2, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.02	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.03	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 22, 0, 0	2, 22, 0, 0	Copyright © 2000	NCompanyName	D	PProductName
+windows	classic	1.03	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.03	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 3, 0	1, 0, 3, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.03	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.04b	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 24, 0, 0	2, 24, 0, 0	Copyright © 2000	NCompanyName	D	PProductName
+windows	classic	1.04b	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.04b	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 4, 1	1, 0, 4, 1	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.04b	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.04b	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.04c	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 24, 0, 0	2, 24, 0, 0	Copyright © 2000	NCompanyName	D	PProductName
+windows	classic	1.04c	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.04c	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 4, 2	1, 0, 4, 2	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.04c	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.04c	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.05	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 24, 0, 0	2, 24, 0, 0	Copyright © 2000	NCompanyName	D	PProductName
+windows	classic	1.05	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.05	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 5, 0	1, 0, 5, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.05	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.05	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.05b	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 24, 0, 0	2, 24, 0, 0	Copyright © 2000	NCompanyName	D	PProductName
+windows	classic	1.05b	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.05b	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 5, 1	1, 0, 5, 1	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.05b	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.05b	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.06	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 24, 0, 0	2, 24, 0, 0	Copyright © 2000	NCompanyName	D	PProductName
+windows	classic	1.06	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.06	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 6, 0	1, 0, 6, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.06	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.06	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.06b	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 24, 0, 0	2, 24, 0, 0	Copyright © 2000	NCompanyName	D	PProductName
+windows	classic	1.06b	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.06b	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 6, 0	1, 0, 6, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.06b	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.06b	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.08	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 26, 0, 0	2, 26, 0, 0	Copyright © 2000-2001	NCompanyName	D	PProductName
+windows	classic	1.08	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.08	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 8, 28	1, 0, 8, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.08	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.08	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.09	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 26, 0, 0	2, 26, 0, 0	Copyright © 2000-2001	NCompanyName	D	PProductName
+windows	classic	1.09	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.09	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 9, 19	1, 0, 9, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.09	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.09	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.09b	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 26, 0, 0	2, 26, 0, 0	Copyright © 2000-2001	NCompanyName	D	PProductName
+windows	classic	1.09b	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.09b	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 9, 20	1, 0, 9, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.09b	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.09b	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.09d	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 30, 0, 0	2, 30, 0, 0	Copyright © 2000-2001	NCompanyName	D	PProductName
+windows	classic	1.09d	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	classic	1.09d	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 9, 22	1, 0, 9, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	classic	1.09d	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.09d	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.10	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.10	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 10, 1	1, 0, 10, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	classic	1.10	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 10, 39	1, 0, 10, 0	Copyright © 2000-2003	>CompanyName	D	RProductName
+windows	classic	1.10	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.10	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.11	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.11	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	classic	1.11	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 11, 45	1, 0, 11, 0	Copyright © 2000-2005	>CompanyName	D	RProductName
+windows	classic	1.11	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.11	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.11b	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.11b	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	classic	1.11b	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 11, 46	1, 0, 11, 1	Copyright © 2000-2005	>CompanyName	D	RProductName
+windows	classic	1.11b	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.11b	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.12a	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.12a	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	classic	1.12a	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 12, 49	1, 0, 12, 1	Copyright © 2000-2005	>CompanyName	D	RProductName
+windows	classic	1.12a	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.12a	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.13c	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.13c	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	classic	1.13c	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 13, 60	1, 0, 13, 0	Copyright © 2000-2005	>CompanyName	D	RProductName
+windows	classic	1.13c	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.13c	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.13d	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.13d	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	classic	1.13d	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 13, 64	1, 0, 13, 0	Copyright © 2000-2005	>CompanyName	D	RProductName
+windows	classic	1.13d	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	classic	1.13d	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.14a	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.14a	Game.exe	Blizzard Entertainment	Diablo II	Diablo II	Diablo II	Diablo II.exe	1.14.0.64	1, 14, 0, 257 (24591cc)	Copyright (c) 2000 - 2016 Blizzard Entertainment. All rights reserved.	NCompanyName	D	4
+ProductName
+windows	classic	1.14a	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.14b	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.14b	Game.exe	Blizzard Entertainment	Diablo II	Diablo II	Diablo II	Diablo II.exe	1.14.1.68	1, 14, 1, 257 (c4580d0)	Copyright (c) 2000 - 2016 Blizzard Entertainment. All rights reserved.	NCompanyName	D	4
+ProductName
+windows	classic	1.14b	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.14c	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.14c	Game.exe	Blizzard Entertainment	Diablo II	Diablo II	Diablo II	Diablo II.exe	1.14.2.70	1, 14, 2, 257 (1811497)	Copyright (c) 2000 - 2016 Blizzard Entertainment. All rights reserved.	NCompanyName	D	4
+ProductName
+windows	classic	1.14c	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	classic	1.14d	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	classic	1.14d	Game.exe	Blizzard Entertainment	Diablo II	Diablo II	Diablo II	Diablo II.exe	1.14.3.71	1, 14, 3, 257 (79b7ae8)	Copyright (c) 2000 - 2016 Blizzard Entertainment. All rights reserved.	NCompanyName	D	4
+ProductName
+windows	classic	1.14d	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	lod	1.07	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	lod	1.07	Diablo II.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 0, 2	1, 0, 0, 1	Copyright © 2000	>CompanyName	D	RProductName
+windows	lod	1.07	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 7, 0	1, 0, 7, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	lod	1.07	RICHED20.dll	Microsoft Corporation	Microsoft RichEdit Control, version 2.0	Rich Text Edit Control, v2.0	riched20	riched20.dll	5.0.152.0	5.0	Copyright © Microsoft Corp. 1997.	Richedit Version 2.0		
+windows	lod	1.07	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.07	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	lod	1.07	diieunin.exe	Blizzard Entertainment	Diablo II Uninstaller	Diablo II Uninstaller	Diablo II Unin	Diablo II Unin.exe	1, 0, 0, 5	Version 1.05	Copyright © 1998	NCompanyName	D	LProductName
+windows	lod	1.07	ijl11.dll	Intel Corporation	Intel® JPEG Library	Intel® JPEG Library - Retail Version	Intel® JPEG Library	ijl11.dll	1.1.2	1.1.2	Copyright © 1999	Intel® JPEG Library	D	16
+windows	lod	1.07	install.exe	Blizzard Entertainment	Diablo II: Lord of Destruction Installer	Diablo II: Lord of Destruction Installer	Install	Install.exe	1, 0, 0, 5	Version 1.00	Copyright © 1999	NCompanyName	D	r)ProductName
+windows	lod	1.07	smackw32.dll	RAD Game Tools, Inc.	Smacker	Smacker Video Technology			3.1n	3.1n	Copyright (C) 1994-97 RAD Game Tools, Inc.	Thank you for using Smacker!		
+windows	lod	1.07_Beta	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	lod	1.07_Beta	D2Server.dll	Blizzard Entertainment	Diablo II	Diablo II Server	D2SERVE	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	lod	1.07_Beta	Diablo II.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 0, 2	1, 0, 0, 1	Copyright © 2000	>CompanyName	D	RProductName
+windows	lod	1.07_Beta	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 7, 0	1, 0, 7, 0	Copyright © 2000	>CompanyName	D	RProductName
+windows	lod	1.07_Beta	SmackW32.dll	RAD Game Tools, Inc.	Smacker	Smacker Video Technology			3.1n	3.1n	Copyright (C) 1994-97 RAD Game Tools, Inc.	Thank you for using Smacker!		
+windows	lod	1.07_Beta	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.07_Beta	Stormd.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.07_Beta	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0i	1.0i	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
+windows	lod	1.07_Beta	diieunin.exe	Blizzard Entertainment	Diablo II Uninstaller	Diablo II Uninstaller	Diablo II Unin	Diablo II Unin.exe	1, 0, 0, 5	Version 1.05	Copyright © 1998	NCompanyName	D	LProductName
+windows	lod	1.07_Beta	ijl11.dll	Intel Corporation	Intel® JPEG Library	Intel® JPEG Library - Retail Version	Intel® JPEG Library	ijl11.dll	1.1.2	1.1.2	Copyright © 1999	Intel® JPEG Library	D	16
+windows	lod	1.07_Beta	INSTALL.EXE	Blizzard Entertainment	Diablo II: Lord of Destruction Installer	Diablo II: Lord of Destruction Installer	Install	Install.exe	1, 0, 0, 5	Version 1.00	Copyright © 1999	NCompanyName	D	r)ProductName
+windows	lod	1.07_Beta	riched20.dll	Microsoft Corporation	Microsoft RichEdit Control, version 2.0	Rich Text Edit Control, v2.0	riched20	riched20.dll	5.0.152.0	5.0	Copyright © Microsoft Corp. 1997.	Richedit Version 2.0		
+windows	lod	1.08	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 26, 0, 0	2, 26, 0, 0	Copyright © 2000-2001	NCompanyName	D	PProductName
+windows	lod	1.08	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	lod	1.08	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 8, 28	1, 0, 8, 256	Copyright © 2001	>CompanyName	D	RProductName
+windows	lod	1.08	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.09	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 26, 0, 0	2, 26, 0, 0	Copyright © 2000-2001	NCompanyName	D	PProductName
+windows	lod	1.09	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	lod	1.09	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 9, 19	1, 0, 9, 256	Copyright © 2001	>CompanyName	D	RProductName
+windows	lod	1.09	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.09b	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 26, 0, 0	2, 26, 0, 0	Copyright © 2000-2001	NCompanyName	D	PProductName
+windows	lod	1.09b	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	lod	1.09b	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 9, 20	1, 0, 9, 256	Copyright © 2001	>CompanyName	D	RProductName
+windows	lod	1.09b	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.09d	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	bnupdate	bnupdate	bnupdate.exe	2, 30, 0, 0	2, 30, 0, 0	Copyright © 2000-2001	NCompanyName	D	PProductName
+windows	lod	1.09d	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	lod	1.09d	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 9, 22	1, 0, 9, 256	Copyright © 2001	>CompanyName	D	RProductName
+windows	lod	1.09d	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.10b_Beta_1	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 70, 0, 0	2, 70, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.10b_Beta_1	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	lod	1.10b_Beta_1	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 10, 9	1, 0, 10, 256	Copyright © 2001	>CompanyName	D	RProductName
+windows	lod	1.10b_Beta_1	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.10f	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.10f	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 10, 1	1, 0, 10, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	lod	1.10f	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 10, 39	1, 0, 10, 256	Copyright © 2001-2003	>CompanyName	D	RProductName
+windows	lod	1.10f	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.10s_Beta_2	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 70, 0, 0	2, 70, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.10s_Beta_2	D2Client.dll	Blizzard Entertainment	Diablo II	Diablo II	D2	D2.exe	0.01	0.01	Copyright © 1997-1998	Developed by Blizzard North		
+windows	lod	1.10s_Beta_2	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 10, 10	1, 0, 10, 256	Copyright © 2001-2003	>CompanyName	D	RProductName
+windows	lod	1.10s_Beta_2	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.11	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.11	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	lod	1.11	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 11, 45	1, 0, 11, 256	Copyright © 2001-2005	>CompanyName	D	RProductName
+windows	lod	1.11	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.11b	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.11b	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	lod	1.11b	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 11, 46	1, 0, 11, 257	Copyright © 2001-2005	>CompanyName	D	RProductName
+windows	lod	1.11b	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.12a	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.12a	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	lod	1.12a	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 12, 49	1, 0, 12, 257	Copyright © 2001-2006	>CompanyName	D	RProductName
+windows	lod	1.12a	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.13a_Beta	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.13a_Beta	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	lod	1.13a_Beta	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 13, 55	1, 0, 13, 257	Copyright © 2001-2006	>CompanyName	D	RProductName
+windows	lod	1.13a_Beta	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.13c	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.13c	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	lod	1.13c	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 13, 60	1, 0, 13, 257	Copyright © 2001-2006	>CompanyName	D	RProductName
+windows	lod	1.13c	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.13d	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.13d	D2VidTst.exe	Blizzard North	Blizzard North Diablo II Video Test	Diablo II Video Test	Diablo II Video Test	D2VidTst.exe	1, 0, 11, 1	1, 0, 11, 1	Copyright © 2001-2003	>CompanyName	D	h$ProductName
+windows	lod	1.13d	Game.exe	Blizzard North	Blizzard North Diablo II	Diablo II	Diablo II	Diablo II.exe	1, 0, 13, 64	1, 0, 13, 257	Copyright © 2001-2006	>CompanyName	D	RProductName
+windows	lod	1.13d	Storm.dll	Blizzard Entertainment		Storm Library		Storm.dll	1.08b		Copyright © 1999, Blizzard Entertainment			
+windows	lod	1.14a	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.14a	Game.exe	Blizzard Entertainment	Diablo II : Lord of Destruction	Diablo II : Lord of Destruction	Diablo II : Lord of Destruction	Diablo II.exe	1.14.0.64	1, 14, 0, 257 (24591cc)	Copyright (c) 2000 - 2016 Blizzard Entertainment. All rights reserved.	NCompanyName	D	` ProductName
+windows	lod	1.14b	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.14b	Game.exe	Blizzard Entertainment	Diablo II : Lord of Destruction	Diablo II : Lord of Destruction	Diablo II : Lord of Destruction	Diablo II.exe	1.14.1.68	1, 14, 1, 257 (c4580d0)	Copyright (c) 2000 - 2016 Blizzard Entertainment. All rights reserved.	NCompanyName	D	` ProductName
+windows	lod	1.14c	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.14c	Game.exe	Blizzard Entertainment	Diablo II : Lord of Destruction	Diablo II : Lord of Destruction	Diablo II : Lord of Destruction	Diablo II.exe	1.14.2.70	1, 14, 2, 257 (1811497)	Copyright (c) 2000 - 2016 Blizzard Entertainment. All rights reserved.	NCompanyName	D	` ProductName
+windows	lod	1.14d	BNUpdate.exe	Blizzard Entertainment	Blizzard Update Program	BNUpdate	BNUpdate	BNUpdate.exe	2, 72, 0, 0	2, 72, 0, 0	Copyright © 1996-2003	NCompanyName	D	PProductName
+windows	lod	1.14d	Game.exe	Blizzard Entertainment	Diablo II : Lord of Destruction	Diablo II : Lord of Destruction	Diablo II : Lord of Destruction	Diablo II.exe	1.14.3.71	1, 14, 3, 257 (79b7ae8)	Copyright (c) 2000 - 2016 Blizzard Entertainment. All rights reserved.	NCompanyName	D	` ProductName
+windows	lod	1.14d	binkw32.dll	RAD Game Tools, Inc.	Bink	Bink Video			1.0f	1.0f	Copyright (C) 1994-2000, RAD Game Tools, Inc.	Thank you for using Bink!		
