@@ -17,7 +17,6 @@ files/asia/tos_USA.txt	2026-01-09T09:54:42Z
 files/europe/bnserver-WAR3.ini	2026-04-23T00:30:32Z
 files/europe/bnserver.ini	2026-04-23T00:30:32Z
 files/europe/bnserver.ini	2026-04-23T00:30:32Z
-files/europe/lockdown-IX86-02.mpq	2026-04-23T00:30:44Z
 files/europe/tos.txt	2026-04-23T00:30:44Z
 files/europe/tos_BRA.txt	2026-04-23T00:30:44Z
 files/europe/tos_DEU.txt	2026-04-23T00:30:44Z
@@ -58,6 +57,7 @@ files/icons_STAR.bni	2026-01-09T09:54:40Z
 files/icons_STAR.bni	2026-01-09T09:54:40Z
 files/lockdown-IX86-00.mpq	2026-01-09T09:54:40Z
 files/lockdown-IX86-01.mpq	2026-01-09T09:54:40Z
+files/lockdown-IX86-02.mpq	2026-01-09T09:54:40Z
 files/lockdown-IX86-03.mpq	2026-01-09T09:54:40Z
 files/lockdown-IX86-04.mpq	2026-01-09T09:54:40Z
 files/lockdown-IX86-05.mpq	2026-01-09T09:54:40Z
@@ -99,7 +99,6 @@ files/tos_POL.txt	2026-01-09T09:54:42Z
 files/useast/bnserver-WAR3.ini	2026-01-09T09:54:36Z
 files/useast/bnserver.ini	2026-01-09T09:54:36Z
 files/useast/bnserver.ini	2026-01-09T09:54:36Z
-files/useast/lockdown-IX86-02.mpq	2026-01-09T09:54:40Z
 files/useast/tos.txt	2026-01-09T09:54:42Z
 files/useast/tos_BRA.txt	2026-01-09T09:54:42Z
 files/useast/tos_DEU.txt	2026-01-09T09:54:42Z
@@ -111,7 +110,6 @@ files/useast/tos_USA.txt	2026-01-09T09:54:42Z
 files/uswest/bnserver-WAR3.ini	2026-01-09T09:54:36Z
 files/uswest/bnserver.ini	2026-01-09T09:54:36Z
 files/uswest/bnserver.ini	2026-01-09T09:54:36Z
-files/uswest/lockdown-IX86-02.mpq	2026-01-09T09:54:40Z
 files/uswest/tos.txt	2026-01-09T09:54:42Z
 files/uswest/tos_BRA.txt	2026-01-09T09:54:42Z
 files/uswest/tos_DEU.txt	2026-01-09T09:54:42Z
@@ -122,7 +120,6 @@ files/uswest/tos_JPN.txt	2026-01-09T09:54:42Z
 files/uswest/tos_USA.txt	2026-01-09T09:54:42Z
 files/vegas/bnserver.ini	2026-01-15T19:21:54Z
 files/vegas/bnserver.ini	2026-01-15T19:21:54Z
-files/vegas/lockdown-IX86-02.mpq	2026-01-15T19:21:52Z
 files/vegas/tos.txt	2026-01-15T19:21:54Z
 files/vegas/tos_BRA.txt	2026-01-15T19:21:53Z
 files/vegas/tos_DEU.txt	2026-01-15T19:21:54Z
