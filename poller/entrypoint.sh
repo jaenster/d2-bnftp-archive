@@ -1,15 +1,21 @@
 #!/usr/bin/env bash
 # Role-dispatch entrypoint for the d2-bnftp-poller Argo Workflow.
 #
-# Usage: entrypoint.sh <clone|fetch|collect>
+# Usage: entrypoint.sh <prepare|fetch|collect>
 #
-# The CronWorkflow runs a clone -> fetch(x3) -> collect DAG; Argo's DAG
-# dependencies handle ordering. All three roles share a RWX PVC mounted at /work:
-#   clone   - fresh clone of the archive repo into /work/repo (needs GIT_TOKEN)
+# The CronWorkflow runs a prepare -> fetch(x3) -> collect DAG; Argo's DAG
+# dependencies handle ordering. The pods share no volume: each has its own /work,
+# and the bytes the shards fetched travel through an S3 prefix, WORK_S3/RUN_ID/.
+#   prepare - empties WORK_S3 (earlier runs' leftovers) and pins the revision of
+#             the archive repo the run works from: its sha is the output every
+#             later role gets as REPO_SHA, so all shards read one fetch-list.
 #   fetch   - the Zig poller fetches this shard's (file,source) pairs into
-#             /work/stage/<source>/<filename> (SHARD_INDEX/SHARD_TOTAL). The three
+#             /work/stage/<source>/<filename> (SHARD_INDEX/SHARD_TOTAL), then
+#             uploads them to WORK_S3/RUN_ID/stage and checks the upload. The three
 #             fetch pods land on distinct nodes (podAntiAffinity) -> distinct IPs.
-#   collect - compare + placement + commit + push (needs GIT_TOKEN).
+#   collect - downloads every shard's stage, then compare + placement + commit +
+#             push (needs GIT_TOKEN).
+# S3 is reached with rclone, configured from RCLONE_CONFIG_* variables.
 #
 # Discord: instead of streaming every line, roles post only meaningful events via
 # discord() - a committed change (diff + commit link), new/resolved cross-realm
@@ -24,7 +30,9 @@ STAGE="$WORK/stage"
 TOTAL="${SHARD_TOTAL:-3}"
 REPO_URL="github.com/jaenster/d2-bnftp-archive.git"
 GH_REPO="jaenster/d2-bnftp-archive"
-FETCH_LIST_PATH="$REPO/fetch-list"
+FETCH_LIST_PATH="$WORK/fetch-list"
+RAW_URL="https://raw.githubusercontent.com/$GH_REPO"
+RUN_S3="${WORK_S3:-}/${RUN_ID:-}"
 D2_SOURCES="useast uswest asia europe vegas"
 FT_TMP="$WORK/.filetimes"
 
@@ -90,26 +98,38 @@ record_ft() {
   printf '%s\t%s\n' "$2" "$iso" >> "$FT_TMP"
 }
 
-role_clone() {
-  log "clone: fresh clone of the archive repo"
-  if [ -z "${GIT_TOKEN:-}" ]; then
-    discord "ERROR: clone role has no GIT_TOKEN"; return 2
+role_prepare() {
+  log "prepare: clearing $WORK_S3 and pinning the archive repo's revision"
+  if [ -z "${WORK_S3:-}" ]; then
+    discord "ERROR: prepare role has no WORK_S3"; return 2
   fi
-  rm -rf "$REPO" "$STAGE"
-  if ! git clone "https://x-access-token:${GIT_TOKEN}@${REPO_URL}" "$REPO"; then
-    discord "ERROR: clone of $GH_REPO failed"; return 1
-  fi
-  git -C "$REPO" config user.email "d2-bnftp-poller@users.noreply.github.com"
-  git -C "$REPO" config user.name "d2-bnftp-poller"
-  mkdir -p "$STAGE"
-  log "clone: done"
+  # Nothing to purge on a first run; a purge that fails for any other reason
+  # shows up as the fetch upload failing next.
+  rclone purge "$WORK_S3" >/dev/null 2>&1 || true
+  local sha
+  sha="$(git ls-remote "https://${REPO_URL}" refs/heads/main | cut -f1)"
+  case "$sha" in
+    ????????????????????????????????????????) ;;
+    *) discord "ERROR: cannot read the head of $GH_REPO"; return 1 ;;
+  esac
+  printf '%s' "$sha" > /tmp/sha
+  log "prepare: pinned $sha"
   return 0
+}
+
+fetch_list() {
+  # The fetch-list of the pinned revision (the repo is public).
+  mkdir -p "$WORK"
+  if ! curl -fsS "$RAW_URL/$REPO_SHA/fetch-list" -o "$FETCH_LIST_PATH"; then
+    discord "ERROR: cannot read fetch-list at ${REPO_SHA:-?} of $GH_REPO"; return 1
+  fi
 }
 
 role_fetch() {
   local idx="${SHARD_INDEX:-0}"
   log "fetch: shard $idx/$TOTAL into stage"
   mkdir -p "$STAGE"
+  fetch_list || return 1
   FETCH_LIST="$FETCH_LIST_PATH" \
   STAGE_DIR="$STAGE" \
   SHARD_INDEX="$idx" \
@@ -120,6 +140,14 @@ role_fetch() {
   if [ "$rc" -ne 0 ]; then
     discord "ERROR: fetch shard $idx/$TOTAL staged nothing (IP blocked / DNS / gateway down?)"
   fi
+  # The collect pod is elsewhere: hand it what this shard staged, and check the
+  # copy is complete (every staged file is there with its size).
+  if ! rclone copy "$STAGE" "$RUN_S3/stage" --transfers 8 --retries 5 --quiet \
+     || ! rclone check "$STAGE" "$RUN_S3/stage" --one-way --size-only --quiet; then
+    discord "ERROR: fetch shard $idx/$TOTAL could not upload its stage to $WORK_S3"
+    return 1
+  fi
+  log "fetch: shard $idx uploaded $(find "$STAGE" -type f | wc -l | tr -d ' ') files"
   return "$rc"
 }
 
@@ -128,6 +156,20 @@ role_collect() {
   if [ -z "${GIT_TOKEN:-}" ]; then
     discord "ERROR: collect role has no GIT_TOKEN"; return 2
   fi
+  rm -rf "$REPO" "$STAGE"
+  if ! git clone -q "https://x-access-token:${GIT_TOKEN}@${REPO_URL}" "$REPO"; then
+    discord "ERROR: clone of $GH_REPO failed"; return 1
+  fi
+  git -C "$REPO" config user.email "d2-bnftp-poller@users.noreply.github.com"
+  git -C "$REPO" config user.name "d2-bnftp-poller"
+  mkdir -p "$STAGE"
+  if ! rclone copy "$RUN_S3/stage" "$STAGE" --transfers 8 --retries 5 --quiet \
+     || ! rclone check "$RUN_S3/stage" "$STAGE" --one-way --size-only --quiet; then
+    discord "ERROR: collect could not download the shards' stage from $WORK_S3"; return 1
+  fi
+  log "collect: stage has $(find "$STAGE" -type f | wc -l | tr -d ' ') files"
+  # The fetch-list the shards worked from, not whatever the repo's head says now.
+  fetch_list || return 1
   cd "$REPO"
   # Refresh to the freshest origin/main before doing anything, so the resulting
   # commit is always a plain fast-forward (the push can't race a mid-run edit).
@@ -299,15 +341,19 @@ role_collect() {
 
 dispatch() {
   case "$ROLE" in
-    clone)   role_clone ;;
+    prepare) role_prepare ;;
     fetch)   role_fetch ;;
     collect) role_collect ;;
     *)
-      log "usage: entrypoint.sh <clone|fetch|collect>"
+      log "usage: entrypoint.sh <prepare|fetch|collect>"
       return 2
       ;;
   esac
 }
 
 dispatch
-exit $?
+rc=$?
+# A finished run's bytes are of no use to the next one (prepare empties the
+# prefix regardless); drop them once collect has what it needs.
+[ "$ROLE" = collect ] && [ "$rc" -eq 0 ] && rclone purge "$RUN_S3" >/dev/null 2>&1
+exit "$rc"

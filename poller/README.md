@@ -63,20 +63,23 @@ sha256), writes `LAST-FETCHED.txt`, and commits + pushes if anything changed.
 The poller runs as an Argo `CronWorkflow` (weekly) whose spec is a DAG:
 
 ```
-clone -> fetch(x3) -> collect
+prepare -> fetch(x3) -> collect
 ```
 
-- `clone` - one pod does a fresh clone of `d2-bnftp-archive` into `/work/repo`.
+- `prepare` - empties the S3 work prefix and pins the archive repo's head sha, which
+  every later role receives as `REPO_SHA` (all shards read one fetch-list).
 - `fetch` - fanned out to three pods via `withItems: [0,1,2]`, each running
   `SHARD_INDEX={{item}} SHARD_TOTAL=3`. A `podAntiAffinity` on
   `kubernetes.io/hostname` (matching the `app: d2-bnftp-poller, role: fetch` pod
   labels) forces the three fetch pods onto three distinct nodes -> three distinct
   egress IPs, spreading load across the gateways.
-- `collect` - one pod compares + places + regenerates `SHA256SUMS` +
+- `collect` - one pod downloads every shard's stage from S3, then compares + places + regenerates `SHA256SUMS` +
   `REALM-DIVERGENCE.md` + commits + pushes.
 
-Argo's DAG dependencies handle ordering, so there is no shared-PVC barrier; all
-templates mount the same ReadWriteMany PVC at `/work` (longhorn supports RWX).
+Argo's DAG dependencies handle ordering. The pods share no volume: each has an
+emptyDir at `/work`, and each fetch pod uploads its stage to
+`$WORK_S3/$RUN_ID/stage` (rclone, configured from `RCLONE_CONFIG_*`; `RUN_ID` is
+the workflow name) and checks the copy; `collect` downloads and checks it.
 
 The unit of work is a `(file, source)` pair. The Zig poller (the `fetch` role)
 expands the fetch-list into the flat pair list (d2 files x 5 sources, forever
@@ -88,7 +91,7 @@ compare + placement is the `collect` role.
 Each `bnftp.fetch` is retried up to three times because BNFTP occasionally RSTs;
 the `fetch` role exits nonzero if any pair in its shard failed all retries.
 
-`entrypoint.sh` dispatches on its first arg: `entrypoint.sh clone|fetch|collect`.
+`entrypoint.sh` dispatches on its first arg: `entrypoint.sh prepare|fetch|collect`.
 
 ## Discord logging
 
@@ -106,8 +109,9 @@ Unset `DISCORD_WEBHOOK_URL` -> stdout only.
 - `SHARD_INDEX` - this fetch pod's shard index (from `withItems`).
 - `SHARD_TOTAL` - number of shards (3).
 
-The container entrypoint additionally uses `GIT_TOKEN` (clone + collect) and
-`DISCORD_WEBHOOK_URL` (all roles).
+The container entrypoint additionally uses `GIT_TOKEN` (collect), `DISCORD_WEBHOOK_URL`
+(all roles), `WORK_S3` (an rclone path such as `tg:bucket/bnftp-work`), `RUN_ID` and
+`REPO_SHA`, and the `RCLONE_CONFIG_<REMOTE>_*` variables that define the remote.
 
 ## Required secret
 

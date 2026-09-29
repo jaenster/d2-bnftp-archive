@@ -1,7 +1,7 @@
 # d2-bnftp-poller image. Multi-stage: an alpine build stage fetches Zig 0.16.0
 # and compiles the ReleaseSafe binary (the poller links libc via the clientless
 # BNFTP module, so the musl toolchain provides it); the runtime stage is a small
-# alpine with git + ca-certificates + bash for the shard-coordination entrypoint.
+# alpine with git + ca-certificates + bash + rclone for the shard-coordination entrypoint.
 #
 #   docker buildx build --platform=linux/amd64 \
 #     -t ghcr.io/jaenster/d2-bnftp-poller:latest \
@@ -20,7 +20,7 @@ RUN zig build --fetch \
  && zig build -Doptimize=ReleaseSafe
 
 FROM alpine:3.20
-RUN apk add --no-cache git ca-certificates bash curl coreutils
+RUN apk add --no-cache git ca-certificates bash curl coreutils rclone
 COPY --from=build /src/zig-out/bin/d2-bnftp-poller /usr/local/bin/d2-bnftp-poller
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
