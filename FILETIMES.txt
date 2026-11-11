@@ -96,7 +96,6 @@ files/psistorm-XMAC-17.mpq	2026-01-09T09:54:40Z
 files/psistorm-XMAC-18.mpq	2026-01-09T09:54:40Z
 files/psistorm-XMAC-19.mpq	2026-01-09T09:54:40Z
 files/tos_POL.txt	2026-01-09T09:54:42Z
-files/useast/bnserver-WAR3.ini	2026-01-09T09:54:36Z
 files/useast/bnserver.ini	2026-01-09T09:54:36Z
 files/useast/bnserver.ini	2026-01-09T09:54:36Z
 files/useast/tos.txt	2026-01-09T09:54:42Z
