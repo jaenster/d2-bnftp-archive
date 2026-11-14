@@ -17,6 +17,9 @@ files/asia/tos_USA.txt	2026-01-09T09:54:42Z
 files/europe/bnserver-WAR3.ini	2026-04-23T00:30:32Z
 files/europe/bnserver.ini	2026-04-23T00:30:32Z
 files/europe/bnserver.ini	2026-04-23T00:30:32Z
+files/europe/lockdown-IX86-17.mpq	2026-04-23T00:30:44Z
+files/europe/lockdown-IX86-19.mpq	2026-04-23T00:30:44Z
+files/europe/psistorm-XMAC-04.mpq	2026-04-23T00:30:44Z
 files/europe/tos.txt	2026-04-23T00:30:44Z
 files/europe/tos_BRA.txt	2026-04-23T00:30:44Z
 files/europe/tos_DEU.txt	2026-04-23T00:30:44Z
@@ -72,14 +75,11 @@ files/lockdown-IX86-13.mpq	2026-01-09T09:54:40Z
 files/lockdown-IX86-14.mpq	2026-01-09T09:54:40Z
 files/lockdown-IX86-15.mpq	2026-01-09T09:54:40Z
 files/lockdown-IX86-16.mpq	2026-01-09T09:54:40Z
-files/lockdown-IX86-17.mpq	2026-01-09T09:54:40Z
 files/lockdown-IX86-18.mpq	2026-01-09T09:54:40Z
-files/lockdown-IX86-19.mpq	2026-01-09T09:54:40Z
 files/psistorm-XMAC-00.mpq	2026-01-09T09:54:40Z
 files/psistorm-XMAC-01.mpq	2026-01-09T09:54:40Z
 files/psistorm-XMAC-02.mpq	2026-01-09T09:54:40Z
 files/psistorm-XMAC-03.mpq	2026-01-09T09:54:40Z
-files/psistorm-XMAC-04.mpq	2026-01-09T09:54:40Z
 files/psistorm-XMAC-05.mpq	2026-01-09T09:54:40Z
 files/psistorm-XMAC-06.mpq	2026-01-09T09:54:40Z
 files/psistorm-XMAC-07.mpq	2026-01-09T09:54:40Z
@@ -99,6 +99,9 @@ files/tos_POL.txt	2026-01-09T09:54:42Z
 files/useast/bnserver-WAR3.ini	2026-01-09T09:54:36Z
 files/useast/bnserver.ini	2026-01-09T09:54:36Z
 files/useast/bnserver.ini	2026-01-09T09:54:36Z
+files/useast/lockdown-IX86-17.mpq	2026-01-09T09:54:40Z
+files/useast/lockdown-IX86-19.mpq	2026-01-09T09:54:40Z
+files/useast/psistorm-XMAC-04.mpq	2026-01-09T09:54:40Z
 files/useast/tos.txt	2026-01-09T09:54:42Z
 files/useast/tos_BRA.txt	2026-01-09T09:54:42Z
 files/useast/tos_DEU.txt	2026-01-09T09:54:42Z
@@ -110,6 +113,9 @@ files/useast/tos_USA.txt	2026-01-09T09:54:42Z
 files/uswest/bnserver-WAR3.ini	2026-01-09T09:54:36Z
 files/uswest/bnserver.ini	2026-01-09T09:54:36Z
 files/uswest/bnserver.ini	2026-01-09T09:54:36Z
+files/uswest/lockdown-IX86-17.mpq	2026-01-09T09:54:40Z
+files/uswest/lockdown-IX86-19.mpq	2026-01-09T09:54:40Z
+files/uswest/psistorm-XMAC-04.mpq	2026-01-09T09:54:40Z
 files/uswest/tos.txt	2026-01-09T09:54:42Z
 files/uswest/tos_BRA.txt	2026-01-09T09:54:42Z
 files/uswest/tos_DEU.txt	2026-01-09T09:54:42Z
@@ -120,6 +126,9 @@ files/uswest/tos_JPN.txt	2026-01-09T09:54:42Z
 files/uswest/tos_USA.txt	2026-01-09T09:54:42Z
 files/vegas/bnserver.ini	2026-01-15T19:21:54Z
 files/vegas/bnserver.ini	2026-01-15T19:21:54Z
+files/vegas/lockdown-IX86-17.mpq	2026-01-15T19:21:55Z
+files/vegas/lockdown-IX86-19.mpq	2026-01-15T19:21:54Z
+files/vegas/psistorm-XMAC-04.mpq	2026-01-15T19:21:53Z
 files/vegas/tos.txt	2026-01-15T19:21:54Z
 files/vegas/tos_BRA.txt	2026-01-15T19:21:53Z
 files/vegas/tos_DEU.txt	2026-01-15T19:21:54Z
